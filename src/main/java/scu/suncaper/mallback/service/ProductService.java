@@ -13,7 +13,6 @@ public class ProductService {
     ProductDAO productDAO;
 
     public List<Product> get() {
-        //return productDAO.getByPidAndSid(pid, sid);
         return productDAO.findAll();
     }
 }
