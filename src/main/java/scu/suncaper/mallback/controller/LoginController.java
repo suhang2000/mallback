@@ -17,7 +17,7 @@ public class LoginController {
     @CrossOrigin
     @PostMapping("/api/login/user")
     @ResponseBody
-    public Result login(@RequestBody User requestUser) {
+    public Result list(@RequestBody User requestUser) {
         // 对 html 标签进行转义，防止 XSS 攻击
         String uname = requestUser.getUname();
         uname = HtmlUtils.htmlEscape(uname);
@@ -33,3 +33,13 @@ public class LoginController {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+

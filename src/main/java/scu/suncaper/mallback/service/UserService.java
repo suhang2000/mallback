@@ -1,9 +1,9 @@
 package scu.suncaper.mallback.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import scu.suncaper.mallback.dao.UserDAO;
-import scu.suncaper.mallback.pojo.User;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.stereotype.Service;
+        import scu.suncaper.mallback.dao.UserDAO;
+        import scu.suncaper.mallback.pojo.User;
 
 @Service
 public class UserService {
