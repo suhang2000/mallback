@@ -13,6 +13,7 @@ public class AdminLoginController {
     AdminService adminService;
 
     @CrossOrigin
+//    改变PostMapping会导致登录报错"服务器异常"
     @PostMapping("/api/login/admin")
     @ResponseBody
     public Result AdminLogin(@RequestBody Admin requestAdmin) {
