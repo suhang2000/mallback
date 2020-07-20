@@ -17,7 +17,7 @@ public class Product {
     String pname;
     String price;
     String number;
-    String decription;
+    String description;
 
     public String getPid() {
         return pid;
@@ -59,24 +59,27 @@ public class Product {
         this.number = number;
     }
 
-    public String getDecription() {
-        return decription;
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 
-    public void setDecription(String address) {
-        this.decription = decription;
+    public String getDescription() {
+        return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @Override
     public String toString() {
         return "Product{" +
-                "pid=" + pid +
+                "pid='" + pid + '\'' +
                 ", sid='" + sid + '\'' +
                 ", pname='" + pname + '\'' +
                 ", price='" + price + '\'' +
                 ", number='" + number + '\'' +
-                ", decription='" + decription + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
