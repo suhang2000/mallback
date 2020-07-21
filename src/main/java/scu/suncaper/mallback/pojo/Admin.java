@@ -3,7 +3,7 @@ package scu.suncaper.mallback.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -18,7 +18,6 @@ public class Admin {
     /**
      * Real name.
      */
-    @NotEmpty(message = "姓名不能为空")
     @Size(max=20,min=2)
     private String aname;
 
@@ -32,7 +31,7 @@ public class Admin {
     /**
      * Phone number.
      */
-    @NotEmpty(message = "联系电话不能为空")
+    @Pattern(regexp = "1[3|4|5|7|8][0-9]\\d{8}")
     private String phone;
 
     public void setAid(int aid) { this.aid = aid; }

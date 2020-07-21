@@ -14,7 +14,7 @@ import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.AdminService;
 
 @RestController
-public class AdminLoginController {
+public class AdminLogController {
     @Autowired
     AdminService adminService;
 
@@ -40,6 +40,8 @@ public class AdminLoginController {
         }
     }
 
+//    前端点击事件无响应多半是未跨域！
+    @CrossOrigin
     @PostMapping("/api/admin/register")
     public Result AdminRegister(@RequestBody Admin admin) {
         int status = adminService.adminRegister(admin);

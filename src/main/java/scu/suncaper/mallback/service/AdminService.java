@@ -49,11 +49,11 @@ public class AdminService {
             return 2;
         }
 
-        // 默认生成 16 位盐
+        // 生成 24 位salt
         String salt = new SecureRandomNumberGenerator().nextBytes().toString();
         int times = 2;
+        // 生成 32 位加密密码
         String encodedPassword = new SimpleHash("md5", password, salt, times).toString();
-//需要添加属性salt
         admin.setSalt(salt);
         admin.setPassword(encodedPassword);
 
