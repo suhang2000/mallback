@@ -12,26 +12,25 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pid")
-    String pid;
-    String sid;
+    Integer pid;
+    Integer sid;
     String pname;
     String price;
     String number;
     String description;
 
-    public String getPid() {
+    public Integer getPid() {
         return pid;
     }
-
-    public void setPid(int uid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 
-    public String getSid() {
+    public Integer getSid() {
         return sid;
     }
 
-    public void setSid(String uname) {
+    public void setSid(Integer sid) {
         this.sid = sid;
     }
 
@@ -57,10 +56,6 @@ public class Product {
 
     public void setNumber(String email) {
         this.number = number;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid;
     }
 
     public String getDescription() {

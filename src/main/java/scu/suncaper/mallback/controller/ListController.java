@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 import scu.suncaper.mallback.pojo.Product;
 import scu.suncaper.mallback.result.Result;
+import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.ProductService;
 
 import java.util.List;
@@ -15,13 +16,30 @@ import java.util.Objects;
 public class ListController {
     @Autowired
     ProductService productService;
+
     @CrossOrigin
-    @GetMapping("/api/list/product")
+    @PostMapping("/api/list/product")
     @ResponseBody
     public List<Product> list() {
         List<Product> products = productService.get();
-        System.out.println(products);
         return products;
-
+    }
+    @CrossOrigin
+    @PostMapping("/api/list/dropGoodsById")
+    @ResponseBody
+    public Result dropById(@RequestBody Product productToDelete) {
+        Integer pid = productToDelete.getPid();
+        System.out.print(pid+"\n");
+        Product product = productService.getCertain(pid);
+        System.out.print(product+"\n");
+        if(product == null) {
+            return ResultFactory.buildFailResult("商品不存在！");
+        }else {
+            System.out.print("商品存在");
+            //删除商品
+            productService.dropGoodsById(pid);
+            System.out.println("删除成功");
+            return ResultFactory.buildSuccessResult(product.getPname());
+        }
     }
 }
