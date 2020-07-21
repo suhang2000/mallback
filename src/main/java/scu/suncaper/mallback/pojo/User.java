@@ -22,6 +22,7 @@ public class User {
     Date birthday;
     String icon;
     Date register_time;
+    String salt;
 
     public int getUid() {
         return uid;
@@ -101,6 +102,14 @@ public class User {
 
     public void setRegister_time(Date register_time) {
         this.register_time = register_time;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     @Override
