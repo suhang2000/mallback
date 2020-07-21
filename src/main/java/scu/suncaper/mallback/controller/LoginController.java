@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 import scu.suncaper.mallback.pojo.User;
 import scu.suncaper.mallback.result.Result;
+import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.UserService;
 
 import java.util.Objects;
@@ -27,9 +28,12 @@ public class LoginController {
         User user = userService.get(uname, password);
         System.out.println(user);
         if(user == null) {
-            return new Result(400);
+//            return new Result(400);
+            return ResultFactory.buildFailResult("登陆失败");
         }else {
-            return new Result(200);
+//            return new Result(200);
+            System.out.println("This Has Been executed!");
+            return ResultFactory.buildSuccessResult(uname);
         }
     }
 }

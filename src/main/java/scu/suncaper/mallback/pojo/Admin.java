@@ -3,6 +3,8 @@ package scu.suncaper.mallback.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "admin")
@@ -14,30 +16,35 @@ public class Admin {
     private int aid;
 
     /**
+     * Real name.
+     */
+    @NotEmpty(message = "姓名不能为空")
+    @Size(max=20,min=2)
+    private String aname;
+
+    private String salt;
+
+    /**
      * Password.
      */
     private String password;
 
     /**
-     * Real name.
-     */
-    private String aname;
-
-    /**
      * Phone number.
      */
+    @NotEmpty(message = "联系电话不能为空")
     private String phone;
 
-    public void setAid(int aid) {
-        this.aid = aid;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setAid(int aid) { this.aid = aid; }
 
     public void setAname(String aname) {
         this.aname = aname;
+    }
+
+    public void setSalt(String salt) { this.salt = salt; }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setPhone(String phone) {
@@ -48,12 +55,14 @@ public class Admin {
         return aid;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public String getAname() {
         return aname;
+    }
+
+    public String getSalt() { return salt; }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getPhone() {
