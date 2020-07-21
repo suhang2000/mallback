@@ -56,6 +56,7 @@ public class AdminLogController {
         return ResultFactory.buildFailResult("未知错误");
     }
 
+    @CrossOrigin
     @GetMapping("/api/admin/logout")
     public Result logout() {
         Subject subject = SecurityUtils.getSubject();

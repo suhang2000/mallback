@@ -22,8 +22,9 @@ DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `aid` int NOT NULL AUTO_INCREMENT,
   `aname` varchar(50) NOT NULL DEFAULT '0',
-  `password` varchar(50) NOT NULL DEFAULT '0',
-  `phone` varchar(20) NOT NULL DEFAULT '0',
+  `salt` char(24) NOT NULL DEFAULT '0',
+  `password` char(32) NOT NULL DEFAULT '0',
+  `phone` char(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`aid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -70,7 +71,8 @@ DROP TABLE IF EXISTS `saler`;
 CREATE TABLE IF NOT EXISTS `saler` (
   `sid` int NOT NULL AUTO_INCREMENT,
   `sname` varchar(50) NOT NULL DEFAULT '0',
-  `password` varchar(50) NOT NULL DEFAULT '0',
+  `salt` char(24) NOT NULL DEFAULT '0',
+  `password` char(32) NOT NULL DEFAULT '0',
   `phone` varchar(20) NOT NULL DEFAULT '0',
   `email` varchar(20) NOT NULL DEFAULT '0',
   `address` varchar(100) DEFAULT NULL,
@@ -86,8 +88,8 @@ CREATE TABLE IF NOT EXISTS `saler` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `uid` int NOT NULL AUTO_INCREMENT,
-  `uname` varchar(50) NOT NULL DEFAULT '0',
-  `password` varchar(50) NOT NULL DEFAULT '0',
+  `salt` char(24) NOT NULL DEFAULT '0',
+  `password` char(32) NOT NULL DEFAULT '0',
   `phone` varchar(20) NOT NULL DEFAULT '0',
   `email` varchar(20) NOT NULL DEFAULT '0',
   `address` varchar(100) DEFAULT NULL,
