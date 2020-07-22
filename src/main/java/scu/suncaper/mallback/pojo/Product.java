@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -18,6 +20,9 @@ public class Product {
     Double price;
     Integer number;
     String description;
+/*
+    @ManyToMany(mappedBy = "roles")
+    private Set<Cart> carts =new HashSet<>();*/
 
     public Integer getPid() {
         return pid;
@@ -29,6 +34,7 @@ public class Product {
     public Integer getSid() {
         return sid;
     }
+
     public void setSid(Integer sid) {
         this.sid = sid;
     }
@@ -57,6 +63,7 @@ public class Product {
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
