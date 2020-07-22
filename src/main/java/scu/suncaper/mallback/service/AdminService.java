@@ -24,8 +24,8 @@ public class AdminService {
         return adminDAO.getByAnameAndPassword(aname, password);
     }
 
-    public boolean isExist(int aid) {
-        Admin admin = adminDAO.findByAid(aid);
+    public boolean isExist(String aname) {
+        Admin admin = adminDAO.findByAname(aname);
         return null != admin;
     }
     // 生成 20 位salt
@@ -38,13 +38,13 @@ public class AdminService {
     }
 
     public int adminRegister(Admin admin) {
-//        可能需要添加防止输入字符串包括其他字符的验证
-        int aid = admin.getAid();
-        String password = admin.getPassword();
+////        可能需要添加防止输入字符串包括其他字符的验证
+//        int aid = admin.getAid();
         String aname = admin.getAname();
+        String password = admin.getPassword();
         String phone = admin.getPhone();
 
-        admin.setAid(aid);
+//        admin.setAid(aid);
         password = HtmlUtils.htmlEscape(password);
         admin.setPassword(password);
         aname = HtmlUtils.htmlEscape(aname);
@@ -56,12 +56,12 @@ public class AdminService {
             return 0;
         }
 
-        if (isExist(aid)) {
+        if (isExist(aname)) {
             return 2;
         }
 
         String salt = generateSalt();
-        String encodedPassword = md5Hex(password+salt);
+        String encodedPassword = md5Hex(password + salt);
         admin.setSalt(salt);
         admin.setPassword(encodedPassword);
         adminDAO.save(admin);
