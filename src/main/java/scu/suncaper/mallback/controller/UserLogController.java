@@ -20,6 +20,7 @@ public class UserLogController {
     @ResponseBody
     public Result list(@RequestBody User requestUser) {
         // 对 html 标签进行转义，防止 XSS 攻击
+        System.out.println(requestUser);
         String uname = requestUser.getUname();
         uname = HtmlUtils.htmlEscape(uname);
         String password = requestUser.getPassword();

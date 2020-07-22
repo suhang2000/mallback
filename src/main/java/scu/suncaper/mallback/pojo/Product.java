@@ -15,8 +15,8 @@ public class Product {
     Integer pid;
     Integer sid;
     String pname;
-    String price;
-    String number;
+    Double price;
+    Integer number;
     String description;
 
     public Integer getPid() {
@@ -29,7 +29,6 @@ public class Product {
     public Integer getSid() {
         return sid;
     }
-
     public void setSid(Integer sid) {
         this.sid = sid;
     }
@@ -37,31 +36,27 @@ public class Product {
     public String getPname() {
         return pname;
     }
-
-    public void setPname(String password) {
+    public void setPname(String pname) {
         this.pname = pname;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
-
-    public void setPrice(String phone) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return number;
     }
-
-    public void setNumber(String email) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
