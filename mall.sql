@@ -91,7 +91,6 @@ CREATE TABLE IF NOT EXISTS `saler` (
   `email` varchar(20) NOT NULL DEFAULT '0',
   `address` varchar(100) DEFAULT NULL,
   `bank_num` varchar(100) NOT NULL,
-  `icon` varchar(100) DEFAULT NULL,
   `register_time` date DEFAULT NULL,
   PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
