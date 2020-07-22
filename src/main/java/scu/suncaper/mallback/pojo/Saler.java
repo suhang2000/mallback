@@ -19,7 +19,6 @@ public class Saler {
     String email;
     String address;
     String bank_num;
-    String icon;
     Date register_time;
 
     public int getSid() {
@@ -78,14 +77,6 @@ public class Saler {
         this.bank_num = bank_num;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
     public Date getRegister_time() {
         return register_time;
     }
@@ -104,7 +95,6 @@ public class Saler {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", bank_num='" + bank_num + '\'' +
-                ", icon='" + icon + '\'' +
                 ", register_time=" + register_time +
                 '}';
     }

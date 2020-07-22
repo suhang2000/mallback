@@ -11,7 +11,7 @@ import scu.suncaper.mallback.service.UserService;
 import java.util.Objects;
 
 @RestController
-public class LoginController {
+public class UserLogController {
     @Autowired
     UserService userService;
 
@@ -22,16 +22,15 @@ public class LoginController {
         // 对 html 标签进行转义，防止 XSS 攻击
         String uname = requestUser.getUname();
         uname = HtmlUtils.htmlEscape(uname);
-        System.out.println(uname);
         String password = requestUser.getPassword();
 
-        User user = userService.get(uname, password);
-        System.out.println(user);
-        if(user == null) {
-            return ResultFactory.buildFailResult("登陆失败");
-        }else {
-            return ResultFactory.buildSuccessResult(uname);
-        }
+        User user = userService.findByUname(uname);
+        if(user == null)
+            return ResultFactory.buildFailResult("用户不存在");
+        user = userService.get(uname,password);
+        if(user == null)
+            return ResultFactory.buildFailResult("密码不匹配");
+        return ResultFactory.buildSuccessResult(uname);
     }
 }
 
