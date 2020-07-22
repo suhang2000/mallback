@@ -1,10 +1,6 @@
 package scu.suncaper.mallback.controller;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
@@ -26,18 +22,17 @@ public class AdminLogController {
         // 对 html 标签进行转义，防止 XSS 攻击
         String aname = requestAdmin.getAname();
         aname = HtmlUtils.htmlEscape(aname);
-
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(aname, requestAdmin.getPassword());
-        usernamePasswordToken.setRememberMe(true);
-        try{
-            subject.login(usernamePasswordToken);
-            return ResultFactory.buildSuccessResult(aname);
-        }catch (IncorrectCredentialsException e) {
-            return ResultFactory.buildFailResult("密码不匹配");
-        } catch (UnknownAccountException e) {
+        String password = requestAdmin.getPassword();
+        Admin admin = adminService.findByAname(aname);
+        if(admin == null)
             return ResultFactory.buildFailResult("用户不存在");
-        }
+        password = new SimpleHash("md5", password,admin.getSalt() , 2).toString();
+        admin = adminService.get(aname, password);
+        if(admin == null)
+            return ResultFactory.buildFailResult("密码不匹配");
+        else
+            System.out.println("has been invoked");
+            return ResultFactory.buildSuccessResult(aname);
     }
 
 //    前端点击事件无响应多半是未跨域！
@@ -59,8 +54,7 @@ public class AdminLogController {
     @CrossOrigin
     @GetMapping("/api/admin/logout")
     public Result logout() {
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
+//       TODO
         return ResultFactory.buildSuccessResult("成功退出");
     }
 }
