@@ -22,6 +22,10 @@ public class UserService {
         return userDAO.getByUnameAndPassword(uname, password);
     }
 
+    public User findByUnameAndPhone(String uname, String phone) { return userDAO.findByUnameAndPhone(uname, phone);}
+
+    public void save(User user) { userDAO.save(user);}
+
     public boolean isExist(String uname) {
         User user = userDAO.findByUname(uname);
         return null != user;

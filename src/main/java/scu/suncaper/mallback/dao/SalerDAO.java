@@ -7,4 +7,6 @@ public interface SalerDAO extends JpaRepository<Saler, Integer> {
     Saler findBySname(String sname);
 
     Saler getBySnameAndPassword(String sname, String password);
+
+    Saler findBySnameAndPhone(String sname, String phone);
 }

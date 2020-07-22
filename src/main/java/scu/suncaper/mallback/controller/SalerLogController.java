@@ -46,6 +46,24 @@ public class SalerLogController {
     }
 
     @CrossOrigin
+    @PostMapping("/api/pwdreset/saler")
+    @ResponseBody
+    public Result SalerPwdReset(@RequestBody Saler requestSaler) {
+        String sname = HtmlUtils.htmlEscape(requestSaler.getSname());
+        String phone = HtmlUtils.htmlEscape(requestSaler.getPhone());
+        String password = requestSaler.getPassword();
+        Saler saler = salerService.findBySname(sname);
+        if(saler == null)
+            return ResultFactory.buildFailResult("商家不存在");
+        saler = salerService.findBySnameAndPhone(sname,phone);
+        if(saler == null)
+            return ResultFactory.buildFailResult("号码不匹配");
+        saler.setPassword(password);
+        salerService.save(saler);
+        return ResultFactory.buildSuccessResult(sname);
+    }
+
+    @CrossOrigin
     @GetMapping("/api/saler/logout")
     public Result logout() {
 //       TODO
