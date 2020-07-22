@@ -51,4 +51,11 @@ public class ListController {
             return ResultFactory.buildSuccessResult(product.getPname());
         }
     }
+//    @CrossOrigin
+//    @PostMapping("/api/list/apple")
+//    @ResponseBody
+//    public List<Product> detailedInfo(@RequestBody Product productDetailed){
+//        System.out.print("展示订单");
+//        return Product
+//    }
 }
