@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -22,6 +24,15 @@ public class User {
     Date birthday;
     String icon;
     Date register_time;
+    String salt;
+
+    /*
+    @ManyToMany(targetEntity = Product.class)
+    @JoinTable(name = "cart",
+            joinColumns = {@JoinColumn(name = "cuid",referencedColumnName = "uid")},
+            inverseJoinColumns = {@JoinColumn(name = "cpid",referencedColumnName = "pid")}
+    )
+    private Set<Product> products =new HashSet<>();*/
 
     public int getUid() {
         return uid;
@@ -102,6 +113,22 @@ public class User {
     public void setRegister_time(Date register_time) {
         this.register_time = register_time;
     }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+/*
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }*/
 
     @Override
     public String toString() {
