@@ -10,5 +10,6 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     @Modifying
     void deleteByPid(Integer pid);
     Product getByPid(Integer pid);
+    List<Product> getAllBySid(Integer sid);
     List<Product> getAllByPname(String pname);
 }
