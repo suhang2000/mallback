@@ -36,11 +36,11 @@ public class SalerLogController {
         int status = salerService.salerRegister(saler);
         switch (status) {
             case 0:
-                return ResultFactory.buildFailResult("昵称和密码不能为空");
+                return ResultFactory.buildFailResult("商家名/密码/电话号不能为空");
             case 1:
                 return ResultFactory.buildSuccessResult("注册成功");
             case 2:
-                return ResultFactory.buildFailResult("昵称重复");
+                return ResultFactory.buildFailResult("商家名重复");
         }
         return ResultFactory.buildFailResult("未知错误");
     }

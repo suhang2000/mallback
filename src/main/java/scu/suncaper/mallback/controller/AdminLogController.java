@@ -16,7 +16,7 @@ public class AdminLogController {
     AdminService adminService;
 
     @CrossOrigin
-//    改变PostMapping会导致登录报错"服务器异常"
+//    PostMapping应与前端对应
     @PostMapping("/api/login/admin")
     @ResponseBody
     public Result AdminLogin(@RequestBody Admin requestAdmin) {
@@ -42,7 +42,7 @@ public class AdminLogController {
         int status = adminService.adminRegister(admin);
         switch (status) {
             case 0:
-                return ResultFactory.buildFailResult("姓名和密码不能为空");
+                return ResultFactory.buildFailResult("姓名/密码/电话号码不能为空");
             case 1:
                 return ResultFactory.buildSuccessResult("注册成功");
             case 2:

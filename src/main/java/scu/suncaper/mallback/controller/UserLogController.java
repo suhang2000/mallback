@@ -33,6 +33,21 @@ public class UserLogController {
             return ResultFactory.buildFailResult("密码不匹配");
         return ResultFactory.buildSuccessResult(uname);
     }
+
+    @CrossOrigin
+    @PostMapping("/api/register/user")
+    public Result UserRegister(@RequestBody User user) {
+        int status = userService.userRegister(user);
+        switch (status) {
+            case 0:
+                return ResultFactory.buildFailResult("用户名/密码/电话号不能为空");
+            case 1:
+                return ResultFactory.buildSuccessResult("注册成功");
+            case 2:
+                return ResultFactory.buildFailResult("用户名重复");
+        }
+        return ResultFactory.buildFailResult("未知错误");
+    }
 }
 
 
