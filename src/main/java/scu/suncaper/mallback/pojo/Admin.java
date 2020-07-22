@@ -18,7 +18,7 @@ public class Admin {
     /**
      * Real name.
      */
-    @Size(max=20,min=2)
+    @Size(max=50,min=2)
     private String aname;
 
     private String salt;
