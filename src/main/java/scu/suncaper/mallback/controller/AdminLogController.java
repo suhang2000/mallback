@@ -25,14 +25,16 @@ public class AdminLogController {
         aname = HtmlUtils.htmlEscape(aname);
         String password = requestAdmin.getPassword();
         Admin admin = adminService.findByAname(aname);
-        if(admin == null)
+        if(admin == null) {
             return ResultFactory.buildFailResult("用户不存在");
+        }
         password = md5Hex(password+admin.getSalt());
         admin = adminService.get(aname, password);
-        if(admin == null)
+        if(admin == null) {
             return ResultFactory.buildFailResult("密码不匹配");
-        else
+        } else {
             System.out.println("has been invoked");
+        }
             return ResultFactory.buildSuccessResult(aname);
     }
 
