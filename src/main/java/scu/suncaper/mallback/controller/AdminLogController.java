@@ -1,6 +1,5 @@
 package scu.suncaper.mallback.controller;
 
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
@@ -8,6 +7,8 @@ import scu.suncaper.mallback.pojo.Admin;
 import scu.suncaper.mallback.result.Result;
 import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.AdminService;
+
+import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
 @RestController
 public class AdminLogController {
@@ -26,7 +27,7 @@ public class AdminLogController {
         Admin admin = adminService.findByAname(aname);
         if(admin == null)
             return ResultFactory.buildFailResult("用户不存在");
-        password = new SimpleHash("md5", password,admin.getSalt() , 2).toString();
+        password = md5Hex(password+admin.getSalt());
         admin = adminService.get(aname, password);
         if(admin == null)
             return ResultFactory.buildFailResult("密码不匹配");

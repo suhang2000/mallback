@@ -1,12 +1,15 @@
 package scu.suncaper.mallback.service;
 
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 import scu.suncaper.mallback.dao.AdminDAO;
 import scu.suncaper.mallback.pojo.Admin;
+
+import java.security.SecureRandom;
+
+import static org.apache.commons.codec.binary.Base64.encodeBase64String;
+import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
 @Service
 public class AdminService {
@@ -24,6 +27,14 @@ public class AdminService {
     public boolean isExist(int aid) {
         Admin admin = adminDAO.findByAid(aid);
         return null != admin;
+    }
+    // 生成 20 位salt
+    public String generateSalt() {
+        SecureRandom random = new SecureRandom();
+        byte[] bytes = new byte[15];
+        random.nextBytes(bytes);
+        String salt = encodeBase64String(bytes);
+        return salt;
     }
 
     public int adminRegister(Admin admin) {
@@ -49,14 +60,10 @@ public class AdminService {
             return 2;
         }
 
-        // 生成 24 位salt
-        String salt = new SecureRandomNumberGenerator().nextBytes().toString();
-        int times = 2;
-        // 生成 32 位加密密码
-        String encodedPassword = new SimpleHash("md5", password, salt, times).toString();
+        String salt = generateSalt();
+        String encodedPassword = md5Hex(password+salt);
         admin.setSalt(salt);
         admin.setPassword(encodedPassword);
-
         adminDAO.save(admin);
         return 1;
     }
@@ -66,17 +73,14 @@ public class AdminService {
         adminInDB.setAname(admin.getAname());
         adminInDB.setPhone(admin.getPhone());
         adminDAO.save(adminInDB);
-//        adminUserRoleService.saveRoleChanges(userInDB.getId(), user.getRoles());
     }
 
     public Admin passwordReset(Admin admin) {
         Admin adminInDB = adminDAO.findByAname(admin.getAname());
-        String salt = new SecureRandomNumberGenerator().nextBytes().toString();
-        int times = 2;
-
-        adminInDB.setSalt(salt);
-        String encodedPassword = new SimpleHash("md5", "rootpassword", salt, times).toString();
-        adminInDB.setPassword(encodedPassword);
+        String salt = generateSalt();
+        String encodedPassword = md5Hex("rootpassword"+salt);
+        admin.setSalt(salt);
+        admin.setPassword(encodedPassword);
         return adminDAO.save(adminInDB);
     }
 }
