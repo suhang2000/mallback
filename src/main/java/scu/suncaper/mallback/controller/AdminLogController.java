@@ -54,7 +54,6 @@ public class AdminLogController {
     @CrossOrigin
     @GetMapping("/api/admin/logout")
     public Result logout() {
-//       TODO
         return ResultFactory.buildSuccessResult("成功退出");
     }
 }

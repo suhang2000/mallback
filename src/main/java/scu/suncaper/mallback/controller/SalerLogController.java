@@ -62,11 +62,4 @@ public class SalerLogController {
         salerService.save(saler);
         return ResultFactory.buildSuccessResult(sname);
     }
-
-    @CrossOrigin
-    @GetMapping("/api/saler/logout")
-    public Result logout() {
-//       TODO
-        return ResultFactory.buildSuccessResult("成功退出");
-    }
 }
