@@ -30,6 +30,21 @@ CREATE TABLE IF NOT EXISTS `admin` (
 
 INSERT INTO `admin` VALUES ('0', 'root', '5iapiRejp/pFWBKPK0Tw', '6659e6abf400c6a72a52d3db90763c02', '18146856052');
 
+-- 导出  表 mall.cart 结构
+CREATE TABLE IF NOT EXISTS `cart` (
+  `cid` int NOT NULL AUTO_INCREMENT,
+  `cpid` int NOT NULL DEFAULT '0',
+  `cuid` int NOT NULL DEFAULT '0',
+  `number` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cid`),
+  KEY `cpid` (`cpid`),
+  KEY `cuid` (`cuid`),
+  CONSTRAINT `cpid` FOREIGN KEY (`cpid`) REFERENCES `product` (`pid`),
+  CONSTRAINT `cuid` FOREIGN KEY (`cuid`) REFERENCES `user` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 数据导出被取消选择。
+
 -- 导出  表 mall.order 结构
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
