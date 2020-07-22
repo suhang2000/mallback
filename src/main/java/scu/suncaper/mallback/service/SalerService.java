@@ -17,7 +17,11 @@ public class SalerService {
 
     public Saler findBySname(String sname) { return salerDAO.findBySname(sname);}
 
-    public Saler get(String sname,String password) { return salerDAO.getBySnameAndPassword(sname,password);}
+    public Saler get(String sname, String password) { return salerDAO.getBySnameAndPassword(sname,password);}
+
+    public Saler findBySnameAndPhone(String sname, String phone) { return salerDAO.findBySnameAndPhone(sname,phone);}
+
+    public void save(Saler saler) { salerDAO.save(saler);}
 
     public boolean isExist(String sname) {
         Saler saler = salerDAO.findBySname(sname);
