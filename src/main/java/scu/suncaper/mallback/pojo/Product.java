@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 @Entity
 @Table(name = "product")
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
@@ -19,12 +20,10 @@ public class Product {
     Double price;
     Integer number;
     String description;
-//    @ManyToMany(targetEntity = User.class, cascade = CascadeType.ALL , fetch = FetchType.LAZY)
-//    @JoinTable(name = "order",
-//            joinColumns = {@JoinColumn(name = "pid",referencedColumnName = "pid")},
-//            inverseJoinColumns = {@JoinColumn(name = "uid",referencedColumnName = "uid")}
-//    )
-   // public Set<User> users = new HashSet<>();
+/*
+    @ManyToMany(mappedBy = "roles")
+    private Set<Cart> carts =new HashSet<>();*/
+
     public Integer getPid() {
         return pid;
     }
@@ -69,13 +68,6 @@ public class Product {
         this.description = description;
     }
 
-//    public Set<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<User> users) {
-//        this.users = users;
-//    }
     @Override
     public String toString() {
         return "Product{" +

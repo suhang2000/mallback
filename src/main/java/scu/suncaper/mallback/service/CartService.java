@@ -30,7 +30,23 @@ public class CartService {
         cartDAO.updateCart(cpid,cuid ,number);
     }
 
+    public List<List> getCart(int cuid){
+        return cartDAO.getCart(cuid);
+    }
 
+    public void removeGoods(){
+        cartDAO.removeGoods();
+    }
+    public int cartProNum(int cid){
+        return cartDAO.cartProNumber(cid);
+    }
+
+    public void addGoods(){
+        cartDAO.addGoods();
+    }
+    public Integer proNum(int cid){
+        return cartDAO.proNumber(cid);
+    }
 
     public List<Cart> get() {
         return cartDAO.getAllByCuid(1);
@@ -43,6 +59,10 @@ public class CartService {
     @Transactional
     public void addGoodsById(Integer cartToAdd){
         //cartDAO.insertByCid(cartToAdd);
+    }
+    @Transactional
+    public void dropGoodsById(Integer cartToDelete){
+        cartDAO.deleteByCid(cartToDelete);
     }
 
 

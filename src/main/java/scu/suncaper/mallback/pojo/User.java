@@ -24,8 +24,16 @@ public class User {
     Date birthday;
     String icon;
     Date register_time;
-    //@ManyToMany(mappedBy = "users")
-//    public Set<Product> products = new HashSet<>();
+    String salt;
+
+    /*
+    @ManyToMany(targetEntity = Product.class)
+    @JoinTable(name = "cart",
+            joinColumns = {@JoinColumn(name = "cuid",referencedColumnName = "uid")},
+            inverseJoinColumns = {@JoinColumn(name = "cpid",referencedColumnName = "pid")}
+    )
+    private Set<Product> products =new HashSet<>();*/
+
     public int getUid() {
         return uid;
     }
