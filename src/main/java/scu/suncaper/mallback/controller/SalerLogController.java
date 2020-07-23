@@ -25,8 +25,9 @@ public class SalerLogController {
             return ResultFactory.buildFailResult("商家不存在");
         }
         saler = salerService.get(sname, password);
-        if(saler == null)
+        if(saler == null) {
             return ResultFactory.buildFailResult("密码不匹配");
+        }
         return ResultFactory.buildSuccessResult(sname);
     }
 
@@ -53,11 +54,13 @@ public class SalerLogController {
         String phone = HtmlUtils.htmlEscape(requestSaler.getPhone());
         String password = requestSaler.getPassword();
         Saler saler = salerService.findBySname(sname);
-        if(saler == null)
+        if(saler == null) {
             return ResultFactory.buildFailResult("商家不存在");
+        }
         saler = salerService.findBySnameAndPhone(sname,phone);
-        if(saler == null)
+        if(saler == null) {
             return ResultFactory.buildFailResult("号码不匹配");
+        }
         saler.setPassword(password);
         salerService.save(saler);
         return ResultFactory.buildSuccessResult(sname);

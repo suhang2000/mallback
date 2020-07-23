@@ -20,6 +20,7 @@ public class Product {
     Double price;
     Integer number;
     String description;
+    String cover;
 /*
     @ManyToMany(mappedBy = "roles")
     private Set<Cart> carts =new HashSet<>();*/
@@ -66,6 +67,14 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     @Override
