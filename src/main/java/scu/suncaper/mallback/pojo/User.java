@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -12,7 +14,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "uid")
-    int uid;
+    Integer uid;
     String uname;
     String password;
     String phone;
@@ -22,7 +24,13 @@ public class User {
     Date birthday;
     String icon;
     Date register_time;
-
+//    @ManyToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
+//    @JoinTable(name = "order",
+//            joinColumns = {@JoinColumn(name = "uid",referencedColumnName = "uid")},
+//            inverseJoinColumns = {@JoinColumn(name = "pid",referencedColumnName = "pid")}
+//    )
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    public Set<Product> products = new HashSet<>();
     public int getUid() {
         return uid;
     }
@@ -101,6 +109,14 @@ public class User {
 
     public void setRegister_time(Date register_time) {
         this.register_time = register_time;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
     @Override
