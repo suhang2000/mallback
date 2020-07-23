@@ -29,4 +29,14 @@ public class UserController {
         List<User> users = userService.findAll();
         return users;
     }
+
+    @CrossOrigin
+    @PostMapping("/api/home/user/info")
+    public void saveUser(@RequestBody User user) {
+        String userUname = user.getUname();
+        User newUser = userService.findByUname(userUname);
+        user.setPassword(newUser.getPassword());
+        user.setUid(newUser.getUid());
+        userService.save(user);
+    }
 }
