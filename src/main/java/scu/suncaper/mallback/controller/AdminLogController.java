@@ -30,8 +30,9 @@ public class AdminLogController {
         }
         password = md5Hex(password+admin.getSalt());
         admin = adminService.get(aname, password);
-        if(admin == null)
+        if(admin == null) {
             return ResultFactory.buildFailResult("密码不匹配");
+        }
         return ResultFactory.buildSuccessResult(aname);
     }
 

@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import scu.suncaper.mallback.pojo.Product;
-import scu.suncaper.mallback.pojo.UserProduct;
+//import scu.suncaper.mallback.pojo.UserProduct;
 
 import java.util.List;
 import java.util.Set;

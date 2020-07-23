@@ -27,11 +27,13 @@ public class UserLogController {
         String password = requestUser.getPassword();
 
         User user = userService.findByUname(uname);
-        if(user == null)
+        if(user == null) {
             return ResultFactory.buildFailResult("用户不存在");
+        }
         user = userService.get(uname,password);
-        if(user == null)
+        if(user == null) {
             return ResultFactory.buildFailResult("密码不匹配");
+        }
         return ResultFactory.buildSuccessResult(uname);
     }
 
@@ -58,11 +60,13 @@ public class UserLogController {
         String phone = HtmlUtils.htmlEscape(requestUser.getPhone());
         String password = requestUser.getPassword();
         User user = userService.findByUname(uname);
-        if(user == null)
+        if(user == null) {
             return ResultFactory.buildFailResult("用户不存在");
+        }
         user = userService.findByUnameAndPhone(uname,phone);
-        if(user == null)
+        if(user == null) {
             return ResultFactory.buildFailResult("号码不匹配");
+        }
         user.setPassword(password);
         userService.save(user);
         return ResultFactory.buildSuccessResult(uname);

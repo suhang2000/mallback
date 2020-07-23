@@ -4,7 +4,7 @@ package scu.suncaper.mallback.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import scu.suncaper.mallback.pojo.Order;
-import scu.suncaper.mallback.pojo.UserProduct;
+//import scu.suncaper.mallback.pojo.UserProduct;
 import scu.suncaper.mallback.result.Result;
 import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.OrderService;

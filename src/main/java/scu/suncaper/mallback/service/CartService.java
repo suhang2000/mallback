@@ -14,10 +14,11 @@ public class CartService {
     CartDAO cartDAO;
 
     public boolean boo(Integer cpid, Integer cuid){
-        if(cartDAO.getAllByCuidAndCpid(cuid,cpid)!=null)
+        if(cartDAO.getAllByCuidAndCpid(cuid,cpid)!=null) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
     @Transactional
     public void insertCart(Integer cpid,Integer cuid,Integer number){

@@ -2,19 +2,14 @@ package scu.suncaper.mallback.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import scu.suncaper.mallback.dao.OrderDAO;
 import scu.suncaper.mallback.dao.ProductDAO;
 import scu.suncaper.mallback.dao.UserDAO;
-import scu.suncaper.mallback.pojo.Order;
 import scu.suncaper.mallback.pojo.Product;
 import scu.suncaper.mallback.pojo.User;
-import scu.suncaper.mallback.pojo.UserProduct;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
+//import scu.suncaper.mallback.pojo.UserProduct;
 
 
 

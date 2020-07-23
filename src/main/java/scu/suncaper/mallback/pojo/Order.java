@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "product")
+@Table(name = "order")
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 public class Order {
     @Id
@@ -15,12 +15,11 @@ public class Order {
     Integer oid;
     Integer uid;
     Integer pid;
-    String pname;
     Date trade_time;
     Integer trade_num;
     String address;
-    Integer pay_or_not;
-    Integer deliver_or_not;
+    Boolean pay_or_not;
+    Boolean deliver_or_not;
 
     public Integer getOid() {
         return oid;
@@ -64,19 +63,22 @@ public class Order {
         this.address = address;
     }
 
-    public Integer getPay_or_not() {
+    public Boolean getPay_or_not() {
         return pay_or_not;
     }
-    public void setPay_or_not(Integer pay_or_not) {
+
+    public void setPay_or_not(Boolean pay_or_not) {
         this.pay_or_not = pay_or_not;
     }
 
-    public Integer getDeliver_or_not() {
+    public Boolean getDeliver_or_not() {
         return deliver_or_not;
     }
-    public void setDeliver_or_not(Integer deliver_or_not) {
+
+    public void setDeliver_or_not(Boolean deliver_or_not) {
         this.deliver_or_not = deliver_or_not;
     }
+
     @Override
     public String toString() {
         return "Order{" +

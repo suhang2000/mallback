@@ -38,10 +38,11 @@ public class CartController {
         System.out.print(pid+"\n");
         Product product = productService.getCertain(pid);
         System.out.print(product+"\n");
-        if(cartService.boo(product.getPid(),1))
+        if(cartService.boo(product.getPid(),1)) {
             cartService.updateCart(product.getPid(),1,1);
-        else
+        } else {
             cartService.insertCart(product.getPid(),1,1);
+        }
         System.out.println("增加成功");
         return ResultFactory.buildSuccessResult(product.getPname());
 

@@ -35,7 +35,9 @@ public class UserService {
         String uname = user.getUname();
         uname = HtmlUtils.htmlEscape(uname);
         user.setUname(uname);
-        if (isExist(uname)) return 2;
+        if (isExist(uname)) {
+            return 2;
+        }
         String password = user.getPassword();
         String phone = user.getPhone();
         String email = user.getEmail();
@@ -57,7 +59,9 @@ public class UserService {
             e.printStackTrace();
         }
         user.setIcon(HtmlUtils.htmlEscape(icon));
-        if (uname.equals("") || password.equals("") || phone.equals("")) return 0;
+        if (uname.equals("") || password.equals("") || phone.equals("")) {
+            return 0;
+        }
         userDAO.save(user);
         return 1;
     }
