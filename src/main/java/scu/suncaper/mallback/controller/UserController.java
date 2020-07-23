@@ -1,12 +1,11 @@
 package scu.suncaper.mallback.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import scu.suncaper.mallback.pojo.User;
 import scu.suncaper.mallback.service.UserService;
+
+import java.util.List;
 
 /**
  * @author 李苏航
@@ -21,5 +20,13 @@ public class UserController {
     public User getUser(@PathVariable String uname) {
         System.out.println(uname);
         return userService.findByUname(uname);
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/admin/user")
+    @ResponseBody
+    public List<User> findAll() {
+        List<User> users = userService.findAll();
+        return users;
     }
 }
