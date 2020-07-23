@@ -35,7 +35,7 @@ public class AdminLogController {
         return ResultFactory.buildSuccessResult(aname);
     }
 
-//    前端点击事件无响应多半是未跨域！
+    //    前端点击事件无响应多半是未跨域！
     @CrossOrigin
     @PostMapping("/api/register/admin")
     public Result AdminRegister(@RequestBody Admin admin) {

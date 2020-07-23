@@ -24,11 +24,6 @@ public class User {
     Date birthday;
     String icon;
     Date register_time;
-//    @ManyToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
-//    @JoinTable(name = "order",
-//            joinColumns = {@JoinColumn(name = "uid",referencedColumnName = "uid")},
-//            inverseJoinColumns = {@JoinColumn(name = "pid",referencedColumnName = "pid")}
-//    )
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     public Set<Product> products = new HashSet<>();
     public int getUid() {
@@ -109,6 +104,10 @@ public class User {
 
     public void setRegister_time(Date register_time) {
         this.register_time = register_time;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
     public Set<Product> getProducts() {

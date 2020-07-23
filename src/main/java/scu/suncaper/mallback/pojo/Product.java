@@ -19,7 +19,6 @@ public class Product {
     Double price;
     Integer number;
     String description;
-    //@ManyToMany(mappedBy = "products")
     @ManyToMany(targetEntity = User.class, cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     @JoinTable(name = "order",
             joinColumns = {@JoinColumn(name = "pid",referencedColumnName = "pid")},
@@ -36,6 +35,7 @@ public class Product {
     public Integer getSid() {
         return sid;
     }
+
     public void setSid(Integer sid) {
         this.sid = sid;
     }
@@ -64,6 +64,7 @@ public class Product {
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -75,7 +76,6 @@ public class Product {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-
     @Override
     public String toString() {
         return "Product{" +

@@ -25,8 +25,9 @@ public class SalerLogController {
             return ResultFactory.buildFailResult("商家不存在");
         }
         saler = salerService.get(sname, password);
-        if(saler == null)
+        if(saler == null) {
             return ResultFactory.buildFailResult("密码不匹配");
+        }
         return ResultFactory.buildSuccessResult(sname);
     }
 
@@ -36,19 +37,32 @@ public class SalerLogController {
         int status = salerService.salerRegister(saler);
         switch (status) {
             case 0:
-                return ResultFactory.buildFailResult("昵称和密码不能为空");
+                return ResultFactory.buildFailResult("商家名/密码/电话号不能为空");
             case 1:
                 return ResultFactory.buildSuccessResult("注册成功");
             case 2:
-                return ResultFactory.buildFailResult("昵称重复");
+                return ResultFactory.buildFailResult("商家名重复");
         }
         return ResultFactory.buildFailResult("未知错误");
     }
 
     @CrossOrigin
-    @GetMapping("/api/saler/logout")
-    public Result logout() {
-//       TODO
-        return ResultFactory.buildSuccessResult("成功退出");
+    @PostMapping("/api/pwdreset/saler")
+    @ResponseBody
+    public Result SalerPwdReset(@RequestBody Saler requestSaler) {
+        String sname = HtmlUtils.htmlEscape(requestSaler.getSname());
+        String phone = HtmlUtils.htmlEscape(requestSaler.getPhone());
+        String password = requestSaler.getPassword();
+        Saler saler = salerService.findBySname(sname);
+        if(saler == null) {
+            return ResultFactory.buildFailResult("商家不存在");
+        }
+        saler = salerService.findBySnameAndPhone(sname,phone);
+        if(saler == null) {
+            return ResultFactory.buildFailResult("号码不匹配");
+        }
+        saler.setPassword(password);
+        salerService.save(saler);
+        return ResultFactory.buildSuccessResult(sname);
     }
 }
