@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 正在导出表  mall.admin 的数据：~1 rows (大约)
-DELETE FROM `admin`;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` (`aid`, `aname`, `salt`, `password`, `phone`) VALUES
 	(0, 'root', '5iapiRejp/pFWBKPK0Tw', '6659e6abf400c6a72a52d3db90763c02', '18146856052');
@@ -50,7 +49,6 @@ CREATE TABLE IF NOT EXISTS `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 正在导出表  mall.cart 的数据：~0 rows (大约)
-DELETE FROM `cart`;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 
@@ -63,18 +61,19 @@ CREATE TABLE IF NOT EXISTS `order` (
   `trade_time` date NOT NULL,
   `trade_num` int NOT NULL DEFAULT '1',
   `address` varchar(100) NOT NULL DEFAULT '0',
-  `pay` tinyint NOT NULL DEFAULT '0',
-  `deliver` tinyint NOT NULL DEFAULT '0',
+  `pay_or_not` tinyint NOT NULL DEFAULT '0',
+  `deliver_or_not` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`oid`),
   KEY `uid` (`uid`),
   KEY `pid` (`pid`),
   CONSTRAINT `pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),
   CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 正在导出表  mall.order 的数据：~0 rows (大约)
-DELETE FROM `order`;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` (`oid`, `uid`, `pid`, `trade_time`, `trade_num`, `address`, `pay_or_not`, `deliver_or_not`) VALUES
+	(1, 1, 4, '2020-07-23', 1, '成都', 0, 0);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 
 -- 导出  表 mall.product 结构
@@ -92,8 +91,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   CONSTRAINT `sid` FOREIGN KEY (`sid`) REFERENCES `saler` (`sid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  mall.product 的数据：~11 rows (大约)
-DELETE FROM `product`;
+-- 正在导出表  mall.product 的数据：~0 rows (大约)
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
 INSERT INTO `product` (`pid`, `sid`, `pname`, `price`, `number`, `description`, `cover`) VALUES
 	(1, 1, '衣服', 35, 2, '这是一件衣服', 'https://img.alicdn.com/imgextra/i3/384698632/O1CN01iNISXq2DdVP5H16DW_!!384698632-0-beehive-scenes.jpg_180x180xzq90.jpg_.webp'),
@@ -124,8 +122,7 @@ CREATE TABLE IF NOT EXISTS `saler` (
   PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  mall.saler 的数据：~1 rows (大约)
-DELETE FROM `saler`;
+-- 正在导出表  mall.saler 的数据：~0 rows (大约)
 /*!40000 ALTER TABLE `saler` DISABLE KEYS */;
 INSERT INTO `saler` (`sid`, `sname`, `password`, `phone`, `email`, `address`, `bank_num`, `icon`, `register_time`) VALUES
 	(1, 'test', 'test', '15683336525', '574658957@qq.com', '四川省成都市', '12345687945', NULL, '2020-07-23');
@@ -148,8 +145,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 正在导出表  mall.user 的数据：~0 rows (大约)
-DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` (`uid`, `uname`, `password`, `phone`, `email`, `address`, `gender`, `birthday`, `icon`, `register_time`) VALUES
+	(1, 'test', 'test', '15687426354', '254869871@qq.com', '四川省成都市', '男', '2020-07-23', NULL, '2020-07-23');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
