@@ -32,12 +32,12 @@ public class OrderService {
     User user = new User();
     Product product = new Product();
 
-    @Transactional
-    public void addOrder() {
-        user.getProducts().add(product);
-        userDAO.save(user);
-        productDAO.save(product);
-    }
+//    @Transactional
+//    public void addOrder() {
+//        user.getProducts().add(product);
+//        userDAO.save(user);
+//        productDAO.save(product);
+//    }
 
     //查询卖家售卖的所有订单
     @Test

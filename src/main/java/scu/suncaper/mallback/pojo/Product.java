@@ -19,12 +19,12 @@ public class Product {
     Double price;
     Integer number;
     String description;
-    @ManyToMany(targetEntity = User.class, cascade = CascadeType.ALL , fetch = FetchType.LAZY)
-    @JoinTable(name = "order",
-            joinColumns = {@JoinColumn(name = "pid",referencedColumnName = "pid")},
-            inverseJoinColumns = {@JoinColumn(name = "uid",referencedColumnName = "uid")}
-    )
-    public Set<User> users = new HashSet<>();
+//    @ManyToMany(targetEntity = User.class, cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+//    @JoinTable(name = "order",
+//            joinColumns = {@JoinColumn(name = "pid",referencedColumnName = "pid")},
+//            inverseJoinColumns = {@JoinColumn(name = "uid",referencedColumnName = "uid")}
+//    )
+   // public Set<User> users = new HashSet<>();
     public Integer getPid() {
         return pid;
     }
@@ -69,13 +69,13 @@ public class Product {
         this.description = description;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
     @Override
     public String toString() {
         return "Product{" +

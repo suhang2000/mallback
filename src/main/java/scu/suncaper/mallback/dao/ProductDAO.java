@@ -16,6 +16,7 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     Product getBySid(Integer sid);
     Set<Product> getAllBySid(Integer sid);
     List<Product> getAllByPname(String pname);
+
     @Query(nativeQuery = true, value = "SELECT p.pid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not, o.deliver_or_not from `user` u, product p, `order` o"
             + " where u.uid = o.uid and p.pid = o.pid and p.sid = ?1 group by p.pid, p.pname")
     List<Object[]> findByNameContaining(Integer sid);

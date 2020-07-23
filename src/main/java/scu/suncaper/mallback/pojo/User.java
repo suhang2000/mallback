@@ -24,8 +24,8 @@ public class User {
     Date birthday;
     String icon;
     Date register_time;
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
-    public Set<Product> products = new HashSet<>();
+    //@ManyToMany(mappedBy = "users")
+//    public Set<Product> products = new HashSet<>();
     public int getUid() {
         return uid;
     }
@@ -106,17 +106,17 @@ public class User {
         this.register_time = register_time;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
+//    public void setUid(Integer uid) {
+//        this.uid = uid;
+//    }
+//
+//    public Set<Product> getProducts() {
+//        return products;
+//    }
 
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
+//    public void setProducts(Set<Product> products) {
+//        this.products = products;
+//    }
 
     @Override
     public String toString() {
