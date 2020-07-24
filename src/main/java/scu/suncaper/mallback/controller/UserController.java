@@ -34,6 +34,7 @@ public class UserController {
     @PostMapping("/api/home/user/info")
     public void saveUser(@RequestBody User user) {
         String userUname = user.getUname();
+        System.out.println("传回来的user：" + user.getBirthday());
         User newUser = userService.findByUname(userUname);
         user.setPassword(newUser.getPassword());
         user.setUid(newUser.getUid());
