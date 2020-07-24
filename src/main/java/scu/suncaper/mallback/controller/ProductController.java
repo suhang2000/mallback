@@ -23,28 +23,19 @@ public class ProductController {
     @PostMapping("/api/list/addGoods")
     @ResponseBody
     public void addProduct(@RequestBody Product newProduct){
-        System.out.println("进入商品添加功能");
-        System.out.println(newProduct);
         productService.addProduct(newProduct);
     }
     @CrossOrigin
     @PostMapping("/api/list/dropGoodsById")
     @ResponseBody
     public Result dropById(@RequestBody Product productToDelete) {
-        System.out.println("productToDelete is :");
-        System.out.println(productToDelete);
         Integer pid = productToDelete.getPid();
-        System.out.println("pid is :");
-        System.out.println(pid);
         Product product = productService.getCertain(pid);
-        System.out.println(product);
         if(product == null) {
             return ResultFactory.buildFailResult("商品不存在！");
         }else {
-            System.out.print("商品存在");
             //删除商品
             productService.dropGoodsById(pid);
-            System.out.println("删除成功");
             return ResultFactory.buildSuccessResult(product.getPname());
         }
     }
@@ -53,10 +44,7 @@ public class ProductController {
     @PostMapping("/api/home/product/info")
     public void saveProduct(@RequestBody Product product) {
         Product product1 = productService.getCertain(product.getPid());
-        System.out.println("传回来product = " + product.toString());
         product.setSid(product1.getSid());
-        System.out.println("传回来修改后product = " + product.toString());
-        System.out.println("数据库product1 = " + product1.toString());
         productService.save(product);
     }
 }

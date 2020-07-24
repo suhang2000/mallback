@@ -48,14 +48,17 @@ public class CartController {
     @PostMapping("/api/list/addCart")
     @ResponseBody
     public Result addCartById(@RequestBody Product productToAddCart) {
+        System.out.println("成功");
         Integer pid = productToAddCart.getPid();
-        System.out.println("成功，pid:"+pid);
+        System.out.print(pid+"\n");
         Product product = productService.getCertain(pid);
+        System.out.print(product+"\n");
         if(cartService.boo(product.getPid(),1)) {
             cartService.updateCart(product.getPid(),1,1);
         } else {
             cartService.insertCart(product.getPid(),1,1);
         }
+        System.out.println("增加成功");
         return ResultFactory.buildSuccessResult(product.getPname());
 
     }
@@ -66,7 +69,6 @@ public class CartController {
     @ResponseBody
     public Result addGoods(@RequestBody Cart goodToAdd) {
         Integer cid = goodToAdd.getCid();
-        System.out.println("cid:"+cid);
         Cart cart = cartService.getCertain(cid);
         cartService.addGoods(cid);
         System.out.println("添加成功");
@@ -74,7 +76,7 @@ public class CartController {
 
     }
 
-    //减少商品数量
+    //添加商品数量
     @CrossOrigin
     @PostMapping("/api/cart/removeGoods")
     @ResponseBody
@@ -86,6 +88,7 @@ public class CartController {
         if(proNum==0){
             cartService.dropGoodsById(cid);
         }
+
         return ResultFactory.buildSuccessResult(cid);
 
     }

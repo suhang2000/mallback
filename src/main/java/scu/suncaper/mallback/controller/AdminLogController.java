@@ -21,7 +21,7 @@ public class AdminLogController {
 //    改变PostMapping会导致登录报错"服务器异常"
     @PostMapping("/api/login/admin")
     @ResponseBody
-    public Result AdminLogin(@RequestBody Admin requestAdmin) {
+    public Result adminLogin(@RequestBody Admin requestAdmin) {
         // 对 html 标签进行转义，防止 XSS 攻击
         String aname = requestAdmin.getAname();
         aname = HtmlUtils.htmlEscape(aname);
@@ -41,7 +41,7 @@ public class AdminLogController {
     //    前端点击事件无响应多半是未跨域！
     @CrossOrigin
     @PostMapping("/api/register/admin")
-    public Result AdminRegister(@RequestBody Admin admin) {
+    public Result adminRegister(@RequestBody Admin admin) {
         int status = adminService.adminRegister(admin);
         switch (status) {
             case 0:
@@ -50,8 +50,9 @@ public class AdminLogController {
                 return ResultFactory.buildSuccessResult("注册成功");
             case 2:
                 return ResultFactory.buildFailResult("管理人员重复注册");
+            default:
+                return ResultFactory.buildFailResult("未知错误");
         }
-        return ResultFactory.buildFailResult("未知错误");
     }
 
     @CrossOrigin
@@ -60,7 +61,7 @@ public class AdminLogController {
 
     @CrossOrigin
     @PostMapping("/api/admin/pwdreset")
-    public Result AdminPwdReset(@RequestBody Admin admin) {
+    public Result adminPwdReset(@RequestBody Admin admin) {
         int aid = admin.getAid();
         admin = adminService.findByAid(aid);
         admin = adminService.passwordReset(admin);

@@ -26,10 +26,7 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/api/searchBy/sid")
     @ResponseBody
-    public List<Object[]> ShowOrdersBySid(@RequestBody Order orderToShow) {
-        System.out.println("下午好");
-        System.out.println("orderToShow is :");
-        System.out.println(orderToShow);
+    public List<Object[]> showOrdersBySid(@RequestBody Order orderToShow) {
         Integer sid =123 ;
         List<Object[]> AllOrders = orderService.getOrdersBySid(sid);
         System.out.println(AllOrders);
@@ -193,7 +190,6 @@ public class OrderController {
             orders.get(i).add(8,"未支付");
         }
         return orders;
-
     }
 
     //用户查看未支付订单-list
@@ -222,7 +218,7 @@ public class OrderController {
     public List<List<String>> view2() {
         List<List<String>> orders= orderService.getUserOrder2(1);
         for(int i=0;i<orders.size();i++){
-            orders.get(i).add(8,"待发货");
+            orders.get(i).add(8,"未发货");
         }
         return orders;
     }
