@@ -53,7 +53,7 @@ public class SalerService {
         try{
             saler.setRegister_time(sdf.parse(sdf.format(new Date())));
         }catch (ParseException e){
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         if (sname.equals("") || password.equals("") || phone.equals("")) {
             return 0;
