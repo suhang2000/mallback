@@ -22,7 +22,6 @@ public class OrderController {
     @PostMapping("/api/apple")
     @ResponseBody
     public List<Object[]> list(@RequestBody Order orderToShow) {
-        System.out.println("下午好");
         System.out.println("orderToShow is :");
         System.out.println(orderToShow);
         Integer sid =123 ;

@@ -8,8 +8,6 @@ import scu.suncaper.mallback.dao.UserDAO;
 import scu.suncaper.mallback.pojo.Product;
 import scu.suncaper.mallback.pojo.User;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,21 +18,12 @@ public class OrderService {
     OrderDAO orderDAO;
     @Autowired
     ProductDAO productDAO;
-    User user = new User();
-    Product product = new Product();
-
-    //    @Transactional
-//    public void addOrder() {
-//        user.getProducts().add(product);
-//        userDAO.save(user);
-//        productDAO.save(product);
-//    }
 
     //查询卖家售卖的所有订单
     public List<Object[]> getAllOrders(Integer sid) {
         Integer defaultSip = 123;
 
-        List<Object[]> products = productDAO.findByNameContaining(defaultSip);
+        List<Object[]> products = productDAO.findBySidContaining(defaultSip);
         for (Object[] pro : products) {
             for (Object object : pro) {
                 System.out.print(object + ", ");
@@ -43,21 +32,15 @@ public class OrderService {
         }
         return products;
     }
-//    public Order  getCertain(Integer  pid) {
-//        return orderDAO.getByPid(pid);
-//    }
-//
-//    @Transactional
-//    public void dropGoodsById(Integer productToDelete){
-//        orderDAO.deleteByPid(productToDelete);
-//    }
 
     public void  deleteCertain(Integer  oid) {
         orderDAO.deleteByOid(oid);
     }
+
     public List<List<String>> getUserOrder(int cuid){
         return orderDAO.getUserOrder(cuid);
     }
+
     public List<List<String>> getUserOrder1(int cuid){
         return orderDAO.getUserOrder1(cuid);
     }
