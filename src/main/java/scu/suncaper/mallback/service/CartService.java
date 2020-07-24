@@ -34,15 +34,15 @@ public class CartService {
         return cartDAO.getCart(cuid);
     }
 
-    public void removeGoods(){
-        cartDAO.removeGoods();
+    public void removeGoods(Integer cid){
+        cartDAO.removeGoods(cid);
     }
     public int cartProNum(int cid){
         return cartDAO.cartProNumber(cid);
     }
 
-    public void addGoods(){
-        cartDAO.addGoods();
+    public void addGoods(Integer cid){
+        cartDAO.addGoods(cid);
     }
     public Integer proNum(int cid){
         return cartDAO.proNumber(cid);

@@ -29,13 +29,13 @@ public interface CartDAO extends JpaRepository<Cart, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "update cart set number=number+1",nativeQuery = true)
-    void addGoods();
+    @Query(value = "update cart set number=number+1 where cid=?1",nativeQuery = true)
+    void addGoods(Integer cid);
 
     @Transactional
     @Modifying
-    @Query(value = "update cart set number=number-1",nativeQuery = true)
-    void removeGoods();
+    @Query(value = "update cart set number=number-1 where cid=?1",nativeQuery = true)
+    void removeGoods(Integer cid);
 
     @Modifying
     void deleteByCid(Integer cid);
