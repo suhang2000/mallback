@@ -59,7 +59,7 @@ public class UserService {
         try{
             user.setRegister_time(sdf.parse(sdf.format(new Date())));
         }catch (ParseException e){
-//            e.printStackTrace();
+            e.printStackTrace();
         }
         user.setIcon(HtmlUtils.htmlEscape(icon));
         if (uname.equals("") || password.equals("") || phone.equals("")) {
