@@ -84,18 +84,4 @@ public class Saler {
     public void setRegister_time(Date register_time) {
         this.register_time = register_time;
     }
-
-    @Override
-    public String toString() {
-        return "Saler{" +
-                "sid=" + sid +
-                ", sname='" + sname + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                ", bank_num='" + bank_num + '\'' +
-                ", register_time=" + register_time +
-                '}';
-    }
 }

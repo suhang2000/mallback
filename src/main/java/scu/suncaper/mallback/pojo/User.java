@@ -104,20 +104,4 @@ public class User {
     public void setRegister_time(Date register_time) {
         this.register_time = register_time;
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "uid=" + uid +
-                ", uname='" + uname + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                ", gender='" + gender + '\'' +
-                ", birthday=" + birthday +
-                ", icon='" + icon + '\'' +
-                ", register_time=" + register_time +
-                '}';
-    }
 }
