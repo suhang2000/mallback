@@ -31,15 +31,16 @@ public class OrderService {
 
     //查询卖家售卖的所有订单
     public List<Object[]> getAllOrders(Integer sid) {
-        Integer defaultSip = 123;
+        //默认sip，获得1商家的所有订单信息
+        Integer defaultSip = 1;
 
         List<Object[]> products = productDAO.findByNameContaining(defaultSip);
         for (Object[] pro : products) {
-            for (Object object : pro) {
+                for (Object object : pro) {
                 System.out.print(object + ", ");
-            }
-            System.out.println();
-        }
-        return products;
-    }
-}
+                }
+                System.out.println();
+                }
+                return products;
+                }
+                }
