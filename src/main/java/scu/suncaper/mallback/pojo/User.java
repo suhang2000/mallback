@@ -24,7 +24,6 @@ public class User {
     Date birthday;
     String icon;
     Date register_time;
-    String salt;
 
     /*
     @ManyToMany(targetEntity = Product.class)

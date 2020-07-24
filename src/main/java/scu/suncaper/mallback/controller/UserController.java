@@ -22,13 +22,13 @@ public class UserController {
         return userService.findByUname(uname);
     }
 
-    @CrossOrigin
-    @PostMapping("/api/admin/user")
-    @ResponseBody
-    public List<User> findAll() {
-        List<User> users = userService.findAll();
-        return users;
-    }
+//    @CrossOrigin
+//    @PostMapping("/api/admin/user")
+//    @ResponseBody
+//    public List<User> findAll() {
+//        List<User> users = userService.findAll();
+//        return users;
+//    }
 
     @CrossOrigin
     @PostMapping("/api/home/user/info")
