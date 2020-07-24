@@ -48,4 +48,15 @@ public class ProductController {
             return ResultFactory.buildSuccessResult(product.getPname());
         }
     }
+
+    @CrossOrigin
+    @PostMapping("/api/home/product/info")
+    public void saveProduct(@RequestBody Product product) {
+        Product product1 = productService.getCertain(product.getPid());
+        System.out.println("传回来product = " + product.toString());
+        product.setSid(product1.getSid());
+        System.out.println("传回来修改后product = " + product.toString());
+        System.out.println("数据库product1 = " + product1.toString());
+        productService.save(product);
+    }
 }

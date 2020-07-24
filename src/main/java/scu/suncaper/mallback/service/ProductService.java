@@ -49,4 +49,8 @@ public class ProductService {
     public List<Product> getProducts() {
         return productDAO.findAll();
     }
+
+    public void save(Product product) {
+        productDAO.save(product);
+    }
 }
