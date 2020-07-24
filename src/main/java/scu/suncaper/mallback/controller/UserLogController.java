@@ -3,7 +3,6 @@ package scu.suncaper.mallback.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
-import scu.suncaper.mallback.dao.UserDAO;
 import scu.suncaper.mallback.pojo.User;
 import scu.suncaper.mallback.result.Result;
 import scu.suncaper.mallback.result.ResultFactory;
@@ -11,7 +10,6 @@ import scu.suncaper.mallback.service.UserService;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 public class UserLogController {
@@ -21,9 +19,8 @@ public class UserLogController {
     @CrossOrigin
     @PostMapping("/api/login/user")
     @ResponseBody
-    public Result UserLogin(@RequestBody User requestUser) {
+    public Result userLogin(@RequestBody User requestUser) {
         // 对 html 标签进行转义，防止 XSS 攻击
-        System.out.println(requestUser);
         String uname = requestUser.getUname();
         uname = HtmlUtils.htmlEscape(uname);
         String password = requestUser.getPassword();
@@ -41,7 +38,7 @@ public class UserLogController {
 
     @CrossOrigin
     @PostMapping("/api/register/user")
-    public Result UserRegister(@RequestBody User user) {
+    public Result userRegister(@RequestBody User user) {
         int status = userService.userRegister(user);
         switch (status) {
             case 0:
@@ -50,14 +47,15 @@ public class UserLogController {
                 return ResultFactory.buildSuccessResult("注册成功");
             case 2:
                 return ResultFactory.buildFailResult("用户名重复");
+            default:
+                return ResultFactory.buildFailResult("未知错误");
         }
-        return ResultFactory.buildFailResult("未知错误");
     }
 
     @CrossOrigin
     @PostMapping("/api/pwdreset/user")
     @ResponseBody
-    public Result UserPwdReset(@RequestBody User requestUser) {
+    public Result userPwdReset(@RequestBody User requestUser) {
         String uname = HtmlUtils.htmlEscape(requestUser.getUname());
         String phone = HtmlUtils.htmlEscape(requestUser.getPhone());
         String password = requestUser.getPassword();

@@ -4,17 +4,11 @@ package scu.suncaper.mallback.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.web.bind.annotation.*;
 import scu.suncaper.mallback.pojo.Order;
-import scu.suncaper.mallback.result.Result;
-import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.OrderService;
-import scu.suncaper.mallback.service.ProductService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
 import java.lang.String;
 
 @RestController
@@ -25,20 +19,15 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/api/searchBy/sid")
     @ResponseBody
-    public List<Object[]> ShowOrdersBySid(@RequestBody Order orderToShow) {
-        System.out.println("下午好");
-        System.out.println("orderToShow is :");
-        System.out.println(orderToShow);
+    public List<Object[]> showOrdersBySid(@RequestBody Order orderToShow) {
         Integer sid =123 ;
         List<Object[]> AllOrders = orderService.getOrdersBySid(sid);
-        System.out.println(AllOrders);
-
         return AllOrders;
     }
     @CrossOrigin
     @PostMapping("/api/searchBy/sname")
     @ResponseBody
-    public List<Object[]> ShowOrdersBySname(@RequestBody String snameToShow) {
+    public List<Object[]> showOrdersBySname(@RequestBody String snameToShow) {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(snameToShow);
         String name = ((JSONObject) sname).getString("input");
         List<Object[]> AllSalers = orderService.getOrdersBySname(name);
@@ -47,17 +36,16 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/api/searchBy/uname")
     @ResponseBody
-    public List<Object[]> ShowOrdersByUname(@RequestBody String unameToShow) {
+    public List<Object[]> showOrdersByUname(@RequestBody String unameToShow) {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
         String name = ((JSONObject) sname).getString("input");
-        List<Object[]> AllOrders = orderService.getOrdersByUname(name);
-        System.out.println(unameToShow);
-        return AllOrders;
+        List<Object[]> allOrders = orderService.getOrdersByUname(name);
+        return allOrders;
     }
     @CrossOrigin
     @PostMapping("/api/searchBy/pname")
     @ResponseBody
-    public List<Object[]> ShowOrdersByPname(@RequestBody String pnameToShow) {
+    public List<Object[]> showOrdersByPname(@RequestBody String pnameToShow) {
         JSON pname = com.alibaba.fastjson.JSONObject.parseObject(pnameToShow);
         String name = ((JSONObject) pname).getString("input");
         List<Object[]> AllProducts = orderService.getOrdersByPname(name);
@@ -67,11 +55,7 @@ public class OrderController {
     @PostMapping("/api/cart/deleteUserOrder")
     @ResponseBody
     public void dropById(@RequestBody Order orderToDelete) {
-        System.out.println("productToDelete is :");
-        System.out.println(orderToDelete);
         Integer oid = orderToDelete.getOid();
-        System.out.println("pid is :");
-        System.out.println(oid);
         orderService.deleteCertain(oid);
        /*System.out.println(order);
         if(order == null) {
