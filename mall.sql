@@ -123,8 +123,8 @@ CREATE TABLE IF NOT EXISTS `saler` (
 
 -- 正在导出表  mall.saler 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `saler` DISABLE KEYS */;
-INSERT INTO `saler` (`sid`, `sname`, `password`, `phone`, `email`, `address`, `bank_num`, `icon`, `register_time`) VALUES
-	(1, 'test', 'test', '15683336525', '574658957@qq.com', '四川省成都市', '12345687945', NULL, '2020-07-23');
+INSERT INTO `saler` (`sid`, `sname`, `password`, `phone`, `email`, `address`, `bank_num`, `register_time`) VALUES
+	(1, 'test', 'test', '15683336525', '574658957@qq.com', '四川省成都市', '12345687945', '2020-07-23');
 /*!40000 ALTER TABLE `saler` ENABLE KEYS */;
 
 -- 导出  表 mall.user 结构
