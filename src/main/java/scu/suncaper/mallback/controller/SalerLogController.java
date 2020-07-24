@@ -8,6 +8,9 @@ import scu.suncaper.mallback.result.Result;
 import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.SalerService;
 
+import javax.transaction.Transactional;
+import java.util.List;
+
 @RestController
 public class SalerLogController {
     @Autowired
@@ -64,5 +67,21 @@ public class SalerLogController {
         saler.setPassword(password);
         salerService.save(saler);
         return ResultFactory.buildSuccessResult(sname);
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/admin/saler")
+    public List<Object[]> list() { return salerService.getAllSalers(); }
+
+    @CrossOrigin
+    @PostMapping("/api/admin/delesaler")
+    @Transactional
+    public Result deleUser(@RequestBody Saler requestSaler) {
+        Integer sid = requestSaler.getSid();
+        salerService.deleteBySid(sid);
+        if (null == salerService.findBySid(sid))
+            return ResultFactory.buildSuccessResult("成功删除");
+        else
+            return ResultFactory.buildFailResult("后端出错，删除失败");
     }
 }

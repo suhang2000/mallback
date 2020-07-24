@@ -19,6 +19,8 @@ public class UserService {
 
     public User findByUname(String uname) { return userDAO.findByUname(uname);}
 
+    public User findByUid(Integer uid) { return  userDAO.findByUid(uid);}
+
     public User get(String uname, String password) {
         return userDAO.getByUnameAndPassword(uname, password);
     }
@@ -67,6 +69,7 @@ public class UserService {
         return 1;
     }
 
-//    @Query("select new User(u.uid, u.uname, u.phone, u.email, u.address, u.gender, u.birthday, u.icon, u.register_time) from User u")
-//    public List<User> findAll() { return userDAO.findAll();}
+    public List<Object[]> getAllUsers() { return userDAO.findAllExceptpassword(); }
+
+    public void deleteByUid(Integer uid) { userDAO.deleteByUid(uid);}
 }

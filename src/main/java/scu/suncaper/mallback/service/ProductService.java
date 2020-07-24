@@ -23,6 +23,7 @@ public class ProductService {
             return productDAO.getAllByPname(pname);
         }
     }
+
     public Product  getCertain(Integer  pid) {
         return productDAO.getByPid(pid);
     }

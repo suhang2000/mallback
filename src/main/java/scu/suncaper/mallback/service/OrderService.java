@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import scu.suncaper.mallback.dao.OrderDAO;
 import scu.suncaper.mallback.dao.ProductDAO;
 import scu.suncaper.mallback.dao.UserDAO;
-import scu.suncaper.mallback.pojo.Product;
-import scu.suncaper.mallback.pojo.User;
 
 import java.util.List;
 
@@ -33,7 +31,7 @@ public class OrderService {
         return products;
     }
 
-    public void  deleteCertain(Integer  oid) {
+    public void  deleteCertain(Integer oid) {
         orderDAO.deleteByOid(oid);
     }
 

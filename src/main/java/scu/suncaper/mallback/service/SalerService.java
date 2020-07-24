@@ -9,6 +9,7 @@ import scu.suncaper.mallback.pojo.Saler;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class SalerService {
@@ -16,6 +17,8 @@ public class SalerService {
     SalerDAO salerDAO;
 
     public Saler findBySname(String sname) { return salerDAO.findBySname(sname);}
+
+    public Saler findBySid(Integer sid) { return salerDAO.findBySid(sid);}
 
     public Saler get(String sname, String password) { return salerDAO.getBySnameAndPassword(sname,password);}
 
@@ -58,4 +61,8 @@ public class SalerService {
         salerDAO.save(saler);
         return 1;
     }
+
+    public List<Object[]> getAllSalers() { return salerDAO.findAllExceptpassword(); }
+
+    public void deleteBySid(Integer sid) { salerDAO.deleteBySid(sid);}
 }

@@ -12,7 +12,7 @@ public class Saler {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sid")
-    int sid;
+    Integer sid;
     String sname;
     String password;
     String phone;
@@ -21,11 +21,11 @@ public class Saler {
     String bank_num;
     Date register_time;
 
-    public int getSid() {
+    public Integer getSid() {
         return sid;
     }
 
-    public void setSid(int sid) {
+    public void setSid(Integer sid) {
         this.sid = sid;
     }
 

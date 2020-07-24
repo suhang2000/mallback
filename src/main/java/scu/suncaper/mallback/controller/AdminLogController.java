@@ -8,6 +8,8 @@ import scu.suncaper.mallback.result.Result;
 import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.AdminService;
 
+import java.util.List;
+
 import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
 @RestController
@@ -51,4 +53,22 @@ public class AdminLogController {
         }
         return ResultFactory.buildFailResult("未知错误");
     }
+
+    @CrossOrigin
+    @PostMapping("/api/admin/admininfo")
+    public List<Object[]> list() { return adminService.getAllAdmins(); }
+
+    @CrossOrigin
+    @PostMapping("/api/admin/pwdreset")
+    public Result AdminPwdReset(@RequestBody Admin admin) {
+        int aid = admin.getAid();
+        admin = adminService.findByAid(aid);
+        admin = adminService.passwordReset(admin);
+        if (admin != null)
+            return ResultFactory.buildSuccessResult("成功重置");
+        else
+            return ResultFactory.buildSuccessResult("未知错误");
+    }
+
+
 }

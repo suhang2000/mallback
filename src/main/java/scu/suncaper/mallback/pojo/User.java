@@ -14,7 +14,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "uid")
-    int uid;
+    Integer uid;
     String uname;
     String password;
     String phone;
@@ -25,19 +25,11 @@ public class User {
     String icon;
     Date register_time;
 
-    /*
-    @ManyToMany(targetEntity = Product.class)
-    @JoinTable(name = "cart",
-            joinColumns = {@JoinColumn(name = "cuid",referencedColumnName = "uid")},
-            inverseJoinColumns = {@JoinColumn(name = "cpid",referencedColumnName = "pid")}
-    )
-    private Set<Product> products =new HashSet<>();*/
-
-    public int getUid() {
+    public Integer getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 
@@ -112,18 +104,6 @@ public class User {
     public void setRegister_time(Date register_time) {
         this.register_time = register_time;
     }
-
-//    public void setUid(Integer uid) {
-//        this.uid = uid;
-//    }
-//
-//    public Set<Product> getProducts() {
-//        return products;
-//    }
-
-//    public void setProducts(Set<Product> products) {
-//        this.products = products;
-//    }
 
     @Override
     public String toString() {

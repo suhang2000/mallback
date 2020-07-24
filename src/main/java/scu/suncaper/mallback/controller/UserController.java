@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import scu.suncaper.mallback.pojo.User;
 import scu.suncaper.mallback.service.UserService;
 
-import java.util.List;
-
 /**
  * @author 李苏航
  */

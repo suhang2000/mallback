@@ -9,6 +9,8 @@ import scu.suncaper.mallback.result.Result;
 import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.UserService;
 
+import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -70,6 +72,24 @@ public class UserLogController {
         user.setPassword(password);
         userService.save(user);
         return ResultFactory.buildSuccessResult(uname);
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/admin/user")
+    public List<Object[]> list() { return userService.getAllUsers(); }
+
+    @CrossOrigin
+    @PostMapping("/api/admin/deleuser")
+    @Transactional
+//    删除操作须得加@Transanctional
+//    数据库须得设置为级联删除
+    public Result deleUser(@RequestBody User requestUser) {
+        Integer uid = requestUser.getUid();
+        userService.deleteByUid(uid);
+        if (null == userService.findByUid(uid))
+            return ResultFactory.buildSuccessResult("成功删除");
+        else
+            return ResultFactory.buildFailResult("后端出错，删除失败");
     }
 }
 
