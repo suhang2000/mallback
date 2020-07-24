@@ -16,4 +16,5 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     Set<Product> getAllBySid(Integer sid);
     List<Product> getAllByPname(String pname);
 
+
 }
