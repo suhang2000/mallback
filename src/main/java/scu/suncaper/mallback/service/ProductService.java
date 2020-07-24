@@ -33,6 +33,19 @@ public class ProductService {
         productDAO.deleteByPid(productToDelete);
     }
 
+    @Transactional
+    public void addProduct(Product newProduct){
+            Product pro = new Product();
+            pro.setPname(newProduct.getPname());
+            pro.setNumber(newProduct.getNumber());
+            pro.setDescription(newProduct.getDescription());
+            pro.setPrice(newProduct.getPrice());
+            pro.setSid(newProduct.getSid());
+
+            Product res = productDAO.save(pro);
+            System.out.println("after insert res: " + res);
+    }
+
     public List<Product> getProducts() {
         return productDAO.findAll();
     }

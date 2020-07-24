@@ -1,10 +1,10 @@
 package scu.suncaper.mallback.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import scu.suncaper.mallback.pojo.Product;
+import scu.suncaper.mallback.result.Result;
+import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.ProductService;
 
 import java.util.List;
@@ -18,5 +18,34 @@ public class ProductController {
     @GetMapping("/api/home/products")
     public List<Product> productList() {
         return productService.getProducts();
+    }
+    @CrossOrigin
+    @PostMapping("/api/list/addGoods")
+    @ResponseBody
+    public void addProduct(@RequestBody Product newProduct){
+        System.out.println("进入商品添加功能");
+        System.out.println(newProduct);
+        productService.addProduct(newProduct);
+    }
+    @CrossOrigin
+    @PostMapping("/api/list/dropGoodsById")
+    @ResponseBody
+    public Result dropById(@RequestBody Product productToDelete) {
+        System.out.println("productToDelete is :");
+        System.out.println(productToDelete);
+        Integer pid = productToDelete.getPid();
+        System.out.println("pid is :");
+        System.out.println(pid);
+        Product product = productService.getCertain(pid);
+        System.out.println(product);
+        if(product == null) {
+            return ResultFactory.buildFailResult("商品不存在！");
+        }else {
+            System.out.print("商品存在");
+            //删除商品
+            productService.dropGoodsById(pid);
+            System.out.println("删除成功");
+            return ResultFactory.buildSuccessResult(product.getPname());
+        }
     }
 }

@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `cart` (
   PRIMARY KEY (`cid`),
   KEY `cpid` (`cpid`),
   KEY `cuid` (`cuid`),
-  CONSTRAINT `cpid` FOREIGN KEY (`cpid`) REFERENCES `product` (`pid`),
-  CONSTRAINT `cuid` FOREIGN KEY (`cuid`) REFERENCES `user` (`uid`)
+  CONSTRAINT `cpid` FOREIGN KEY (`cpid`) REFERENCES `product` (`pid`) ON DELETE CASCADE,
+  CONSTRAINT `cuid` FOREIGN KEY (`cuid`) REFERENCES `user` (`uid`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 正在导出表  mall.cart 的数据：~0 rows (大约)
@@ -66,11 +66,11 @@ CREATE TABLE IF NOT EXISTS `order` (
   PRIMARY KEY (`oid`),
   KEY `uid` (`uid`),
   KEY `pid` (`pid`),
-  CONSTRAINT `pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),
-  CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`)
+  CONSTRAINT `pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE CASCADE,
+  CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  mall.order 的数据：~0 rows (大约)
+-- 正在导出表  mall.order 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
 INSERT INTO `order` (`oid`, `uid`, `pid`, `trade_time`, `trade_num`, `address`, `pay_or_not`, `deliver_or_not`) VALUES
 	(1, 1, 4, '2020-07-23', 1, '成都', 0, 0);
@@ -88,10 +88,10 @@ CREATE TABLE IF NOT EXISTS `product` (
   `cover` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`pid`),
   KEY `sid` (`sid`),
-  CONSTRAINT `sid` FOREIGN KEY (`sid`) REFERENCES `saler` (`sid`)
+  CONSTRAINT `sid` FOREIGN KEY (`sid`) REFERENCES `saler` (`sid`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  mall.product 的数据：~0 rows (大约)
+-- 正在导出表  mall.product 的数据：~11 rows (大约)
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
 INSERT INTO `product` (`pid`, `sid`, `pname`, `price`, `number`, `description`, `cover`) VALUES
 	(1, 1, '衣服', 35, 2, '这是一件衣服', 'https://img.alicdn.com/imgextra/i3/384698632/O1CN01iNISXq2DdVP5H16DW_!!384698632-0-beehive-scenes.jpg_180x180xzq90.jpg_.webp'),
@@ -122,10 +122,10 @@ CREATE TABLE IF NOT EXISTS `saler` (
   PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  mall.saler 的数据：~0 rows (大约)
+-- 正在导出表  mall.saler 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `saler` DISABLE KEYS */;
 INSERT INTO `saler` (`sid`, `sname`, `password`, `phone`, `email`, `address`, `bank_num`, `icon`, `register_time`) VALUES
-	(1, 'test', 'test', '15683336525', '574658957@qq.com', '四川省成都市', '13345687945', NULL, '2020-07-23');
+	(1, 'test', 'test', '15683336525', '574658957@qq.com', '四川省成都市', '12345687945', NULL, '2020-07-23');
 /*!40000 ALTER TABLE `saler` ENABLE KEYS */;
 
 -- 导出  表 mall.user 结构
@@ -139,15 +139,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   `address` varchar(100) DEFAULT NULL,
   `gender` varchar(10) DEFAULT NULL,
   `birthday` date DEFAULT NULL,
-  `icon` varchar(100) DEFAULT NULL,
+  `icon` varchar(200) DEFAULT NULL,
   `register_time` date DEFAULT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  mall.user 的数据：~0 rows (大约)
+-- 正在导出表  mall.user 的数据：~2 rows (大约)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`uid`, `uname`, `password`, `phone`, `email`, `address`, `gender`, `birthday`, `icon`, `register_time`) VALUES
-	(1, 'test', 'test', '15687426354', '254869871@qq.com', '四川省成都市', '男', '2020-07-23', NULL, '2020-07-23');
+	(1, 'test', 'test', '15687426354', '254869871@qq.com', '四川省成都市双流区', '女', '2002-06-08', 'https://i1.hdslb.com/bfs/archive/5af948fcfd1cc4059257a5fef520633ae6252ed5.jpg', NULL),
+	(4, 'user', '123', '15683331111', '526874598@qq.com', '四川省成都市双流区', '男', '2020-07-01', 'https://i1.hdslb.com/bfs/archive/5af948fcfd1cc4059257a5fef520633ae6252ed5.jpg', NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

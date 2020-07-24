@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import scu.suncaper.mallback.dao.OrderDAO;
 import scu.suncaper.mallback.dao.ProductDAO;
 import scu.suncaper.mallback.dao.UserDAO;
+import scu.suncaper.mallback.pojo.Product;
+import scu.suncaper.mallback.pojo.User;
 
 import java.util.List;
 
@@ -18,10 +20,11 @@ public class OrderService {
     ProductDAO productDAO;
 
     //查询卖家售卖的所有订单
-    public List<Object[]> getAllOrders(Integer sid) {
-        Integer defaultSip = 123;
+    public List<Object[]> getOrdersBySid(Integer sid) {
+        //默认sip，获得1商家的所有订单信息
+        Integer defaultSip = 1;
 
-        List<Object[]> products = productDAO.findBySidContaining(defaultSip);
+        List<Object[]> products = orderDAO.findBySidContaining(defaultSip);
         for (Object[] pro : products) {
             for (Object object : pro) {
                 System.out.print(object + ", ");
@@ -30,8 +33,20 @@ public class OrderService {
         }
         return products;
     }
+    public List<Object[]> getOrdersBySname(String sname){
+        List<Object[]> OrdersBySname = orderDAO.findBySnameContaining(sname);
+        return OrdersBySname;
+    }
+    public List<Object[]> getOrdersByPname(String pname){
+        List<Object[]> ordersByPname =orderDAO.findByPnameContaining(pname);
+        return ordersByPname;
+    }
+    public List<Object[]> getOrdersByUname(String uname){
+        List<Object[]> ordersByUname =orderDAO.findByUnameContaining(uname);
+        return ordersByUname;
+    }
 
-    public void  deleteCertain(Integer oid) {
+    public void  deleteCertain(Integer  oid) {
         orderDAO.deleteByOid(oid);
     }
 

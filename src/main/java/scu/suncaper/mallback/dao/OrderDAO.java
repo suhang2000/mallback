@@ -31,4 +31,24 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
     List<List<String>> getUserOrder3(Integer cuid);
 
     void deleteByOid(Integer oid);
+
+    @Query(nativeQuery = true, value = "SELECT p.pid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
+            " o.deliver_or_not,u.uname,s.sname from `user` u, product p, `order` o, saler s"
+            + " where u.uid = o.uid and p.pid = o.pid and p.sid = s.sid and p.sid = ?1 group by p.pid, p.pname")
+    List<Object[]> findBySidContaining(Integer sid);
+
+    @Query(nativeQuery = true, value = "SELECT p.pid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
+            " o.deliver_or_not,u.uname,s.sname from `user` u, product p, `order` o, saler s"
+            + " where u.uid = o.uid and p.pid = o.pid and p.sid = s.sid and p.pname = ?1 group by p.pid, p.pname")
+    List<Object[]> findByPnameContaining(String pname);
+
+    @Query(nativeQuery = true, value = "SELECT p.pid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
+            " o.deliver_or_not,u.uname,s.sname from `user` u, product p, `order` o, saler s"
+            + " where u.uid = o.uid and p.pid = o.pid and p.sid = s.sid and u.uname = ?1 group by p.pid, p.pname")
+    List<Object[]> findByUnameContaining(String uname);
+
+    @Query(nativeQuery = true, value = "SELECT p.pid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
+            " o.deliver_or_not,u.uname,s.sname from `user` u, product p, `order` o, saler s"
+            + " where u.uid = o.uid and p.pid = o.pid and p.sid = s.sid and s.sname= ?1 group by p.pid, p.pname")
+    List<Object[]> findBySnameContaining(String sname);
 }
