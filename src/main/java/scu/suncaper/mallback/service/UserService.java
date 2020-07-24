@@ -1,5 +1,6 @@
 package scu.suncaper.mallback.service;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
@@ -55,13 +56,10 @@ public class UserService {
         user.setAddress(HtmlUtils.htmlEscape(address));
         user.setGender(HtmlUtils.htmlEscape(gender));
         user.setBirthday(birthday);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try{
-            user.setRegister_time(sdf.parse(sdf.format(new Date())));
-        }catch (ParseException e){
-            e.printStackTrace();
-        }
+        Date today = new DateTime().withTimeAtStartOfDay().toLocalDateTime().toDate();
+        user.setRegister_time(today);
         user.setIcon(HtmlUtils.htmlEscape(icon));
+
         if (uname.equals("") || password.equals("") || phone.equals("")) {
             return 0;
         }
