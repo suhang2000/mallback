@@ -68,5 +68,5 @@ public class UserService {
     }
 
 //    @Query("select new User(u.uid, u.uname, u.phone, u.email, u.address, u.gender, u.birthday, u.icon, u.register_time) from User u")
-    public List<User> findAll() { return userDAO.findAll();}
+//    public List<User> findAll() { return userDAO.findAll();}
 }

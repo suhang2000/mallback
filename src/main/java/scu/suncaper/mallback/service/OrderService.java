@@ -13,10 +13,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-//import scu.suncaper.mallback.pojo.UserProduct;
-
-
-
 @Service
 public class OrderService {
     @Autowired
@@ -28,7 +24,7 @@ public class OrderService {
     User user = new User();
     Product product = new Product();
 
-//    @Transactional
+    //    @Transactional
 //    public void addOrder() {
 //        user.getProducts().add(product);
 //        userDAO.save(user);

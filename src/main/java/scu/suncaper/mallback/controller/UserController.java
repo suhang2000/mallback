@@ -22,18 +22,19 @@ public class UserController {
         return userService.findByUname(uname);
     }
 
-    @CrossOrigin
-    @PostMapping("/api/admin/user")
-    @ResponseBody
-    public List<User> findAll() {
-        List<User> users = userService.findAll();
-        return users;
-    }
+//    @CrossOrigin
+//    @PostMapping("/api/admin/user")
+//    @ResponseBody
+//    public List<User> findAll() {
+//        List<User> users = userService.findAll();
+//        return users;
+//    }
 
     @CrossOrigin
     @PostMapping("/api/home/user/info")
     public void saveUser(@RequestBody User user) {
         String userUname = user.getUname();
+        System.out.println("传回来的user：" + user.getBirthday());
         User newUser = userService.findByUname(userUname);
         user.setPassword(newUser.getPassword());
         user.setUid(newUser.getUid());
