@@ -113,7 +113,7 @@ public class OrderController {
     @ResponseBody
     public List<Object[]> showOrdersBySname(@RequestBody String snameToShow) {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(snameToShow);
-        String name = ((JSONObject) sname).getString("input");
+        String name = ((JSONObject) sname).getString(INPUT);
         List<Object[]> AllOrdersForSaler = orderService.getOrdersBySname(name);
         List<Object[]> allOrders = turning(AllOrdersForSaler);
         return allOrders;
@@ -123,7 +123,7 @@ public class OrderController {
     @ResponseBody
     public List<Object[]> showOrdersByUname(@RequestBody String unameToShow) {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
-        String name = ((JSONObject) sname).getString("input");
+        String name = ((JSONObject) sname).getString(INPUT);
         List<Object[]> AllOrdersForSaler = orderService.getOrdersByUname(name);
         List<Object[]> allOrders = turning(AllOrdersForSaler);
         return allOrders;
@@ -133,8 +133,8 @@ public class OrderController {
     @ResponseBody
     public List<Object[]> showOrdersByPnameForSaler(@RequestBody String pnameToShow) {
         JSON pname = com.alibaba.fastjson.JSONObject.parseObject(pnameToShow);
-        String targetPname = ((JSONObject) pname).getString("input");
-        String salerName = ((JSONObject) pname).getString("myName");
+        String targetPname = ((JSONObject) pname).getString(INPUT);
+        String salerName = ((JSONObject) pname).getString(MYNAME);
         List<Object[]> AllOrdersForSaler = orderService.getOrdersByPnameAndSname(targetPname, salerName);
         List<Object[]> allOrders = turning(AllOrdersForSaler);
         return allOrders;
@@ -144,8 +144,8 @@ public class OrderController {
     @ResponseBody
     public List<Object[]> ShowOrdersByUnameForSaler(@RequestBody String unameToShow) {
         JSON pname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
-        String targetUname = ((JSONObject) pname).getString("input");
-        String salerName = ((JSONObject) pname).getString("myName");
+        String targetUname = ((JSONObject) pname).getString(INPUT);
+        String salerName = ((JSONObject) pname).getString(MYNAME);
         List<Object[]> AllOrdersForSaler = orderService.getOrdersByUnameAndSname(targetUname, salerName);
         List<Object[]> allOrders = turning(AllOrdersForSaler);
         return allOrders;
@@ -156,7 +156,7 @@ public class OrderController {
     @ResponseBody
     public List<Object[]> showOrdersByPname(@RequestBody String pnameToShow) {
         JSON pname = com.alibaba.fastjson.JSONObject.parseObject(pnameToShow);
-        String name = ((JSONObject) pname).getString("input");
+        String name = ((JSONObject) pname).getString(INPUT);
         List<Object[]> AllOrdersForSaler =  orderService.getOrdersByPname(name);
         List<Object[]> allOrders = turning(AllOrdersForSaler);
         return allOrders;
