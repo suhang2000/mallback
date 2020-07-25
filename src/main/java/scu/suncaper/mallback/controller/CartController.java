@@ -33,40 +33,27 @@ public class CartController {
     @PostMapping("/api/cart/dropGoods")
     @ResponseBody
     public Result dropById(@RequestBody Cart cartToDelete) {
-        System.out.println("productToDelete is :");
-        System.out.println(cartToDelete);
         Integer cid = cartToDelete.getCid();
-        System.out.println("cid is :");
-        System.out.println(cid);
         Cart cart = cartService.getCertain(cid);
-        System.out.println(cart);
         if(cart == null) {
             return ResultFactory.buildFailResult("商品不存在！");
         }else {
-            System.out.print("商品存在");
-            //删除商品
             cartService.dropGoodsById(cid);
-            System.out.println("删除成功");
             return ResultFactory.buildSuccessResult(cart.getCid());
         }
     }
 
-    //添加到购物车，目前还是不能和前端连起来，参数传的时候出了点问题。。
     @CrossOrigin
     @PostMapping("/api/list/addCart")
     @ResponseBody
     public Result addCartById(@RequestBody Product productToAddCart) {
-        System.out.println("成功");
         Integer pid = productToAddCart.getPid();
-        System.out.print(pid+"\n");
         Product product = productService.getCertain(pid);
-        System.out.print(product+"\n");
         if(cartService.boo(product.getPid(),1)) {
             cartService.updateCart(product.getPid(),1,1);
         } else {
             cartService.insertCart(product.getPid(),1,1);
         }
-        System.out.println("增加成功");
         return ResultFactory.buildSuccessResult(product.getPname());
 
     }
@@ -78,7 +65,7 @@ public class CartController {
     public Result addGoods(@RequestBody Cart goodToAdd) {
         Integer cid = goodToAdd.getCid();
         Cart cart = cartService.getCertain(cid);
-        cartService.addGoods();
+        cartService.addGoods(cid);
         System.out.println("添加成功");
         return ResultFactory.buildSuccessResult(cid);
 
@@ -91,8 +78,7 @@ public class CartController {
     public Result removeGoods(@RequestBody Cart goodToRemove) {
         Integer cid = goodToRemove.getCid();
         Cart cart = cartService.getCertain(cid);
-        cartService.removeGoods();
-        System.out.println("删除成功");
+        cartService.removeGoods(cid);
         Integer proNum = cartService.cartProNum(cid);
         if(proNum==0){
             cartService.dropGoodsById(cid);

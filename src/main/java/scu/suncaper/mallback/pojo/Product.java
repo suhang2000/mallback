@@ -3,9 +3,6 @@ package scu.suncaper.mallback.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -20,9 +17,6 @@ public class Product {
     Double price;
     Integer number;
     String description;
-/*
-    @ManyToMany(mappedBy = "roles")
-    private Set<Cart> carts =new HashSet<>();*/
 
     public Integer getPid() {
         return pid;
@@ -71,11 +65,11 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "pid='" + pid + '\'' +
-                ", sid='" + sid + '\'' +
+                "pid=" + pid +
+                ", sid=" + sid +
                 ", pname='" + pname + '\'' +
-                ", price='" + price + '\'' +
-                ", number='" + number + '\'' +
+                ", price=" + price +
+                ", number=" + number +
                 ", description='" + description + '\'' +
                 '}';
     }

@@ -67,14 +67,4 @@ public class Admin {
     public String getPhone() {
         return phone;
     }
-
-    @Override
-    public String toString() {
-        return "Admin{" +
-                "aid=" + aid +
-                ", password='" + password + '\'' +
-                ", aname='" + aname + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
-    }
 }

@@ -8,10 +8,12 @@ import scu.suncaper.mallback.result.Result;
 import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.AdminService;
 
+import java.util.List;
+
 import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
 @RestController
-public class AdminLogController {
+public class AdminController {
     @Autowired
     AdminService adminService;
 
@@ -19,7 +21,7 @@ public class AdminLogController {
 //    改变PostMapping会导致登录报错"服务器异常"
     @PostMapping("/api/login/admin")
     @ResponseBody
-    public Result AdminLogin(@RequestBody Admin requestAdmin) {
+    public Result adminLogin(@RequestBody Admin requestAdmin) {
         // 对 html 标签进行转义，防止 XSS 攻击
         String aname = requestAdmin.getAname();
         aname = HtmlUtils.htmlEscape(aname);
@@ -39,7 +41,7 @@ public class AdminLogController {
     //    前端点击事件无响应多半是未跨域！
     @CrossOrigin
     @PostMapping("/api/register/admin")
-    public Result AdminRegister(@RequestBody Admin admin) {
+    public Result adminRegister(@RequestBody Admin admin) {
         int status = adminService.adminRegister(admin);
         switch (status) {
             case 0:
@@ -48,7 +50,26 @@ public class AdminLogController {
                 return ResultFactory.buildSuccessResult("注册成功");
             case 2:
                 return ResultFactory.buildFailResult("管理人员重复注册");
+            default:
+                return ResultFactory.buildFailResult("未知错误");
         }
-        return ResultFactory.buildFailResult("未知错误");
     }
+
+    @CrossOrigin
+    @PostMapping("/api/admin/admininfo")
+    public List<Object[]> list() { return adminService.getAllAdmins(); }
+
+    @CrossOrigin
+    @PostMapping("/api/admin/pwdreset")
+    public Result adminPwdReset(@RequestBody Admin admin) {
+        int aid = admin.getAid();
+        admin = adminService.findByAid(aid);
+        admin = adminService.passwordReset(admin);
+        if (admin != null)
+            return ResultFactory.buildSuccessResult("成功重置");
+        else
+            return ResultFactory.buildSuccessResult("未知错误");
+    }
+
+
 }

@@ -78,18 +78,4 @@ public class Order {
     public void setDeliver_or_not(Boolean deliver_or_not) {
         this.deliver_or_not = deliver_or_not;
     }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "oid='" + oid + '\'' +
-                ", uid='" + uid + '\'' +
-                ", pid='" + pid + '\'' +
-                ", trade_time='" + trade_time + '\'' +
-                ", trade_num='" + trade_num + '\'' +
-                ", address='" + address + '\'' +
-                ", pay_or_not='" + pay_or_not + '\'' +
-                ", deliver_or_not='" + deliver_or_not + '\'' +
-                '}';
-    }
 }

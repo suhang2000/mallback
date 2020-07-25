@@ -15,6 +15,20 @@ public class ProductController {
     ProductService productService;
 
     @CrossOrigin
+    @PostMapping("/api/list/product")
+    @ResponseBody
+    public List<Product> list(@RequestBody Product productToShow) {
+        System.out.println("productToShow is :");
+        System.out.println(productToShow);
+        String pname = productToShow.getPname();
+        System.out.println("pname is :");
+        System.out.println(pname);
+        List<Product> products = productService.get(pname);
+        System.out.println(products);
+        return products;
+    }
+
+    @CrossOrigin
     @GetMapping("/api/home/products")
     public List<Product> productList() {
         return productService.getProducts();
@@ -47,6 +61,14 @@ public class ProductController {
             System.out.println("删除成功");
             return ResultFactory.buildSuccessResult(product.getPname());
         }
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/home/product/info")
+    public void saveProduct(@RequestBody Product product) {
+        Product product1 = productService.getCertain(product.getPid());
+        product.setSid(product1.getSid());
+        productService.save(product);
     }
 //    @CrossOrigin
 //    @PostMapping("/api/list/product/saler")

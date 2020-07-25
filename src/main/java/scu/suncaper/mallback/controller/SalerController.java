@@ -8,15 +8,18 @@ import scu.suncaper.mallback.result.Result;
 import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.SalerService;
 
+import javax.transaction.Transactional;
+import java.util.List;
+
 @RestController
-public class SalerLogController {
+public class SalerController {
     @Autowired
     SalerService salerService;
 
     @CrossOrigin
     @PostMapping("/api/login/saler")
     @ResponseBody
-    public Result SalerLogin(@RequestBody Saler requestSaler) {
+    public Result salerLogin(@RequestBody Saler requestSaler) {
         String sname = requestSaler.getSname();
         sname = HtmlUtils.htmlEscape(sname);
         String password = requestSaler.getPassword();
@@ -33,7 +36,7 @@ public class SalerLogController {
 
     @CrossOrigin
     @PostMapping("/api/register/saler")
-    public Result SalerRegister(@RequestBody Saler saler) {
+    public Result salerRegister(@RequestBody Saler saler) {
         int status = salerService.salerRegister(saler);
         switch (status) {
             case 0:
@@ -42,14 +45,15 @@ public class SalerLogController {
                 return ResultFactory.buildSuccessResult("注册成功");
             case 2:
                 return ResultFactory.buildFailResult("商家名重复");
+            default:
+                return ResultFactory.buildFailResult("未知错误");
         }
-        return ResultFactory.buildFailResult("未知错误");
     }
 
     @CrossOrigin
     @PostMapping("/api/pwdreset/saler")
     @ResponseBody
-    public Result SalerPwdReset(@RequestBody Saler requestSaler) {
+    public Result salerPwdReset(@RequestBody Saler requestSaler) {
         String sname = HtmlUtils.htmlEscape(requestSaler.getSname());
         String phone = HtmlUtils.htmlEscape(requestSaler.getPhone());
         String password = requestSaler.getPassword();
@@ -64,5 +68,21 @@ public class SalerLogController {
         saler.setPassword(password);
         salerService.save(saler);
         return ResultFactory.buildSuccessResult(sname);
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/admin/saler")
+    public List<Object[]> list() { return salerService.getAllSalers(); }
+
+    @CrossOrigin
+    @PostMapping("/api/admin/delesaler")
+    @Transactional
+    public Result deleUser(@RequestBody Saler requestSaler) {
+        Integer sid = requestSaler.getSid();
+        salerService.deleteBySid(sid);
+        if (null == salerService.findBySid(sid))
+            return ResultFactory.buildSuccessResult("成功删除");
+        else
+            return ResultFactory.buildFailResult("后端出错，删除失败");
     }
 }

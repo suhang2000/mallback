@@ -1,14 +1,14 @@
 package scu.suncaper.mallback.service;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 import scu.suncaper.mallback.dao.SalerDAO;
 import scu.suncaper.mallback.pojo.Saler;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class SalerService {
@@ -16,6 +16,8 @@ public class SalerService {
     SalerDAO salerDAO;
 
     public Saler findBySname(String sname) { return salerDAO.findBySname(sname);}
+
+    public Saler findBySid(Integer sid) { return salerDAO.findBySid(sid);}
 
     public Saler get(String sname, String password) { return salerDAO.getBySnameAndPassword(sname,password);}
 
@@ -46,16 +48,16 @@ public class SalerService {
         saler.setEmail(HtmlUtils.htmlEscape(email));
         saler.setAddress(HtmlUtils.htmlEscape(address));
         saler.setBank_num(HtmlUtils.htmlEscape(bank_num));
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try{
-            saler.setRegister_time(sdf.parse(sdf.format(new Date())));
-        }catch (ParseException e){
-            e.printStackTrace();
-        }
+        Date today = new DateTime().withTimeAtStartOfDay().toLocalDateTime().toDate();
+        saler.setRegister_time(today);
         if (sname.equals("") || password.equals("") || phone.equals("")) {
             return 0;
         }
         salerDAO.save(saler);
         return 1;
     }
+
+    public List<Object[]> getAllSalers() { return salerDAO.findAllExceptpassword(); }
+
+    public void deleteBySid(Integer sid) { salerDAO.deleteBySid(sid);}
 }

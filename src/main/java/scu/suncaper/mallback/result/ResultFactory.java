@@ -10,7 +10,7 @@ public class ResultFactory {
     }
 
     public static Result buildResult(ResultCode resultCode, String message, Object data) {
-        return buildResult(resultCode.code, message, data);
+        return buildResult(resultCode.getCode(), message, data);
     }
 
     public static Result buildResult(int resultCode, String message, Object data) {

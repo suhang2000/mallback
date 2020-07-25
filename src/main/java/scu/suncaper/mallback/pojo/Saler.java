@@ -12,7 +12,7 @@ public class Saler {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sid")
-    int sid;
+    Integer sid;
     String sname;
     String password;
     String phone;
@@ -21,11 +21,11 @@ public class Saler {
     String bank_num;
     Date register_time;
 
-    public int getSid() {
+    public Integer getSid() {
         return sid;
     }
 
-    public void setSid(int sid) {
+    public void setSid(Integer sid) {
         this.sid = sid;
     }
 
@@ -83,19 +83,5 @@ public class Saler {
 
     public void setRegister_time(Date register_time) {
         this.register_time = register_time;
-    }
-
-    @Override
-    public String toString() {
-        return "Saler{" +
-                "sid=" + sid +
-                ", sname='" + sname + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                ", bank_num='" + bank_num + '\'' +
-                ", register_time=" + register_time +
-                '}';
     }
 }

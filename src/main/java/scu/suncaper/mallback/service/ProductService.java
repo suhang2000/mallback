@@ -1,11 +1,9 @@
 package scu.suncaper.mallback.service;
 
-import antlr.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import scu.suncaper.mallback.dao.ProductDAO;
 import scu.suncaper.mallback.pojo.Product;
-import scu.suncaper.mallback.result.Result;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -23,6 +21,7 @@ public class ProductService {
             return productDAO.getAllByPname(pname);
         }
     }
+
     public Product  getCertain(Integer  pid) {
         return productDAO.getByPid(pid);
     }
@@ -47,5 +46,9 @@ public class ProductService {
 
     public List<Product> getProducts() {
         return productDAO.findAll();
+    }
+
+    public void save(Product product) {
+        productDAO.save(product);
     }
 }

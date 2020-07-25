@@ -7,6 +7,7 @@ import scu.suncaper.mallback.dao.AdminDAO;
 import scu.suncaper.mallback.pojo.Admin;
 
 import java.security.SecureRandom;
+import java.util.List;
 
 import static org.apache.commons.codec.binary.Base64.encodeBase64String;
 import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
@@ -15,6 +16,9 @@ import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 public class AdminService {
     @Autowired
     AdminDAO adminDAO;
+    public Admin findByAid(int aid) {
+        return adminDAO.findByAid(aid);
+    }
 
     public Admin findByAname(String aname) {
         return adminDAO.findByAname(aname);
@@ -33,8 +37,7 @@ public class AdminService {
         SecureRandom random = new SecureRandom();
         byte[] bytes = new byte[15];
         random.nextBytes(bytes);
-        String salt = encodeBase64String(bytes);
-        return salt;
+        return encodeBase64String(bytes);
     }
 
     public int adminRegister(Admin admin) {
@@ -65,13 +68,6 @@ public class AdminService {
         return 1;
     }
 
-    public void adminEdit(Admin admin) {
-        Admin adminInDB = adminDAO.findByAname(admin.getAname());
-        adminInDB.setAname(admin.getAname());
-        adminInDB.setPhone(admin.getPhone());
-        adminDAO.save(adminInDB);
-    }
-
     public Admin passwordReset(Admin admin) {
         Admin adminInDB = adminDAO.findByAname(admin.getAname());
         String salt = generateSalt();
@@ -80,4 +76,6 @@ public class AdminService {
         admin.setPassword(encodedPassword);
         return adminDAO.save(adminInDB);
     }
+
+    public List<Object[]> getAllAdmins() { return adminDAO.findAllExceptsalt(); }
 }

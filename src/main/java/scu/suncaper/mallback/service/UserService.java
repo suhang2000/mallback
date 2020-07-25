@@ -1,14 +1,12 @@
 package scu.suncaper.mallback.service;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 import scu.suncaper.mallback.dao.UserDAO;
 import scu.suncaper.mallback.pojo.User;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +16,8 @@ public class UserService {
     UserDAO userDAO;
 
     public User findByUname(String uname) { return userDAO.findByUname(uname);}
+
+    public User findByUid(Integer uid) { return  userDAO.findByUid(uid);}
 
     public User get(String uname, String password) {
         return userDAO.getByUnameAndPassword(uname, password);
@@ -53,13 +53,10 @@ public class UserService {
         user.setAddress(HtmlUtils.htmlEscape(address));
         user.setGender(HtmlUtils.htmlEscape(gender));
         user.setBirthday(birthday);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try{
-            user.setRegister_time(sdf.parse(sdf.format(new Date())));
-        }catch (ParseException e){
-            e.printStackTrace();
-        }
+        Date today = new DateTime().withTimeAtStartOfDay().toLocalDateTime().toDate();
+        user.setRegister_time(today);
         user.setIcon(HtmlUtils.htmlEscape(icon));
+
         if (uname.equals("") || password.equals("") || phone.equals("")) {
             return 0;
         }
@@ -67,6 +64,7 @@ public class UserService {
         return 1;
     }
 
-//    @Query("select new User(u.uid, u.uname, u.phone, u.email, u.address, u.gender, u.birthday, u.icon, u.register_time) from User u")
-//    public List<User> findAll() { return userDAO.findAll();}
+    public List<Object[]> getAllUsers() { return userDAO.findAllExceptpassword(); }
+
+    public void deleteByUid(Integer uid) { userDAO.deleteByUid(uid);}
 }
