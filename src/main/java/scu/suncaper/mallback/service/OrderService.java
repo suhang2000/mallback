@@ -31,18 +31,9 @@ public class OrderService {
 //        productDAO.save(product);
 //    }
 
-    //查询卖家售卖的所有订单
-    public List<Object[]> getOrdersBySid(Integer sid) {
-        //默认sip，获得1商家的所有订单信息
-        Integer defaultSip = 1;
-
-        List<Object[]> products = orderDAO.findBySidContaining(defaultSip);
-        for (Object[] pro : products) {
-            for (Object object : pro) {
-                System.out.print(object + ", ");
-            }
-            System.out.println();
-        }
+    public List<Object[]> findAllOrders() {
+        //管理人员用，用以获取所有订单
+        List<Object[]> products = orderDAO.findAllOrders();
         return products;
     }
     public List<Object[]> getOrdersBySname(String sname){
@@ -55,6 +46,14 @@ public class OrderService {
     }
     public List<Object[]> getOrdersByUname(String uname){
         List<Object[]> ordersByUname =orderDAO.findByUnameContaining(uname);
+        return ordersByUname;
+    }
+    public List<Object[]> getOrdersByPnameAndSname(String pname, String sname){
+        List<Object[]> ordersByPname =orderDAO.findByPnameAndSname(pname, sname);
+        return ordersByPname;
+    }
+    public List<Object[]> getOrdersByUnameAndSname(String uname, String sname){
+        List<Object[]> ordersByUname =orderDAO.findByUnameAndSname(uname, sname);
         return ordersByUname;
     }
 //    public Order  getCertain(Integer  pid) {

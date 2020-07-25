@@ -48,4 +48,22 @@ public class ProductController {
             return ResultFactory.buildSuccessResult(product.getPname());
         }
     }
+//    @CrossOrigin
+//    @PostMapping("/api/list/product/saler")
+//    @ResponseBody
+//    public Result AllProductsForSaler(@RequestBody String sname) {
+//        System.out.println("productToDelete is :");
+//        System.out.println(sname);sname
+//        Product product = productService.getCertain(pid);
+//        System.out.println(product);
+//        if(product == null) {
+//            return ResultFactory.buildFailResult("商品不存在！");
+//        }else {
+//            System.out.print("商品存在");
+//            //删除商品
+//            productService.dropGoodsById(pid);
+//            System.out.println("删除成功");
+//            return ResultFactory.buildSuccessResult(product.getPname());
+//        }
+//}
 }
