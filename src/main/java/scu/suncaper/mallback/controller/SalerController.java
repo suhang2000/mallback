@@ -94,4 +94,22 @@ public class SalerController {
         Saler saler = salerService.findBySname(sname);
         return saler.getSid();
     }
+
+    @CrossOrigin
+    @GetMapping("/api/saler/{sname}/info")
+    public Saler salerInfo(@PathVariable String sname) {
+        System.out.println("查询商家信息sname = " + sname);
+        return salerService.findBySname(sname);
+    }
+
+    @CrossOrigin
+    @PostMapping("api/saler/info")
+    public void saveSaler(@RequestBody Saler saler) {
+        Saler newSaler = salerService.findBySname(saler.getSname());
+        newSaler.setPhone(saler.getPhone());
+        newSaler.setEmail(saler.getEmail());
+        newSaler.setAddress(saler.getAddress());
+        newSaler.setBank_num(saler.getBank_num());
+        salerService.save(newSaler);
+    }
 }
