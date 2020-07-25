@@ -46,10 +46,13 @@ CREATE TABLE IF NOT EXISTS `cart` (
   KEY `cuid` (`cuid`),
   CONSTRAINT `cpid` FOREIGN KEY (`cpid`) REFERENCES `product` (`pid`) ON DELETE CASCADE,
   CONSTRAINT `cuid` FOREIGN KEY (`cuid`) REFERENCES `user` (`uid`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  mall.cart 的数据：~0 rows (大约)
+-- 正在导出表  mall.cart 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` (`cid`, `cpid`, `cuid`, `number`) VALUES
+	(1, 7, 6, 2),
+	(2, 4, 6, 1);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 
 -- 导出  表 mall.order 结构
@@ -68,12 +71,13 @@ CREATE TABLE IF NOT EXISTS `order` (
   KEY `pid` (`pid`),
   CONSTRAINT `pid` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 正在导出表  mall.order 的数据：~1 rows (大约)
+-- 正在导出表  mall.order 的数据：~0 rows (大约)
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
 INSERT INTO `order` (`oid`, `uid`, `pid`, `trade_time`, `trade_num`, `address`, `pay_or_not`, `deliver_or_not`) VALUES
-	(1, 4, 4, '2020-07-24', 1, '0', 0, 0);
+	(2, 1, 1, '2020-07-25', 1, '四川省成都市双流区', 1, 0),
+	(4, 1, 1, '2020-07-25', 1, '四川省成都市双流区', 1, 0);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 
 -- 导出  表 mall.product 结构
@@ -89,22 +93,23 @@ CREATE TABLE IF NOT EXISTS `product` (
   PRIMARY KEY (`pid`),
   KEY `sid` (`sid`),
   CONSTRAINT `sid` FOREIGN KEY (`sid`) REFERENCES `saler` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 正在导出表  mall.product 的数据：~11 rows (大约)
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
 INSERT INTO `product` (`pid`, `sid`, `pname`, `price`, `number`, `description`, `cover`) VALUES
-	(1, 1, '衣服111', 32, 5, '这是一件衣服111', 'https://img.alicdn.com/imgextra/i3/384698632/O1CN01iNISXq2DdVP5H16DW_!!384698632-0-beehive-scenes.jpg_180x180xzq90.jpg_.webp'),
-	(2, 1, '水杯', 20, 5, '这是一个水杯', 'https://img.alicdn.com/bao/uploaded/TB2jQl2ml0kpuFjy1zdXXXuUVXa_!!0-juitemmedia.jpg_180x180xzq90.jpg_.webp'),
-	(3, 1, '设备', 15, 1, '这是一个设备', 'https://img.alicdn.com/bao/uploaded/TB2jH_uoFXXXXXfXpXXXXXXXXXX_!!0-dgshop.jpg_180x180xzq90.jpg_.webp'),
-	(4, 1, '显微镜', 150, 5, '这是一个显微镜', 'https://img.alicdn.com/bao/uploaded/i4/2564032885/TB2gfRiiwxlpuFjy0FoXXa.lXXa_!!2564032885.jpg_200x200q90.jpg_.webp'),
-	(5, 1, '水杯', 20, 5, '这是一个水杯', 'https://img.alicdn.com/bao/uploaded/TB2jQl2ml0kpuFjy1zdXXXuUVXa_!!0-juitemmedia.jpg_180x180xzq90.jpg_.webp'),
-	(6, 1, '水杯', 20, 5, '这是一个水杯', 'https://img.alicdn.com/bao/uploaded/TB2jQl2ml0kpuFjy1zdXXXuUVXa_!!0-juitemmedia.jpg_180x180xzq90.jpg_.webp'),
-	(7, 1, '显微镜', 150, 5, '这是一个显微镜', 'https://img.alicdn.com/bao/uploaded/i4/2564032885/TB2gfRiiwxlpuFjy0FoXXa.lXXa_!!2564032885.jpg_200x200q90.jpg_.webp'),
-	(8, 1, '显微镜', 150, 5, '这是一个显微镜', 'https://img.alicdn.com/bao/uploaded/i4/2564032885/TB2gfRiiwxlpuFjy0FoXXa.lXXa_!!2564032885.jpg_200x200q90.jpg_.webp'),
-	(9, 1, '显微镜', 150, 5, '这是一个显微镜', 'https://img.alicdn.com/bao/uploaded/i4/2564032885/TB2gfRiiwxlpuFjy0FoXXa.lXXa_!!2564032885.jpg_200x200q90.jpg_.webp'),
-	(10, 1, '显微镜', 150, 5, '这是一个显微镜', 'https://img.alicdn.com/bao/uploaded/i4/2564032885/TB2gfRiiwxlpuFjy0FoXXa.lXXa_!!2564032885.jpg_200x200q90.jpg_.webp'),
-	(11, 1, '显微镜', 150, 5, '这是一个显微镜', 'https://img.alicdn.com/bao/uploaded/i4/2564032885/TB2gfRiiwxlpuFjy0FoXXa.lXXa_!!2564032885.jpg_200x200q90.jpg_.webp');
+	(1, 1, '包', 20, 5, '设计新款手工头层疯马皮复古横款粗犷原创单肩包斜挎包真牛皮男包', 'https://img.alicdn.com/bao/uploaded/i4/TB199RhPXXXXXa4apXXYXGcGpXX_M2.SS2_200x200q90.jpg_.webp'),
+	(2, 1, '分线器', 20, 5, 'USB3.0分线器笔记本电脑一拖四集线HUB转换扩展多外接口', 'https://img.alicdn.com/bao/uploaded/i4/TB1iYVbOXXXXXcoXXXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp'),
+	(3, 1, '拖鞋', 15, 1, '可爱棉拖鞋秋冬季韩版毛毛拖鞋女室内月子平底保暖防滑居家时尚潮', 'https://img.alicdn.com/bao/uploaded/i1/2455463936/TB1bkVtaStYBeNjSspkXXbU8VXa_!!0-item_pic.jpg_200x200q90.jpg_.webp'),
+	(4, 1, '沙发', 150, 5, '现货美式欧式简约现代田园单人沙发老虎椅高背椅卧室客厅书房椅子', 'https://img.alicdn.com/imgextra/i4/53263072/O1CN01aXBLBB1YZ1IC4uxqd_!!0-saturn_solar.jpg_260x260.jpg'),
+	(5, 1, '电脑椅', 20, 5, '西昊人体工学椅子电脑椅家用转椅学生学习书桌椅办公写字升降座椅', 'https://img.alicdn.com/imgextra/i2/27907426/O1CN01JM3G7Z24j9lHNrEd4_!!0-saturn_solar.jpg_260x260.jpg'),
+	(6, 1, '鞋', 20, 5, '高帮帆布鞋男韩版潮流百搭2020新款夏季透气潮鞋男士高邦休闲板鞋', 'https://gma.alicdn.com/bao/uploaded/i3/362170059/O1CN01D1ozue1CJ3ybHzYvC_!!0-saturn_solar.jpg_200x200.jpg_.webp'),
+	(7, 1, '拉杆箱', 150, 5, '行李箱ins网红新款20寸学生拉杆箱男女韩版24寸拉链旅行密码皮箱', 'https://img.alicdn.com/imgextra/i1/914570175/O1CN01J45zKb1DABunuJEJe_!!0-saturn_solar.jpg_260x260.jpg'),
+	(8, 1, '面膜', 150, 5, '自然堂富勒烯小灯泡面膜5片石墨烯提亮细致抗氧化发光黑科技官网', 'https://img.alicdn.com/imgextra/i2/42258719/O1CN015T4ViS2EHLuIoKIPu_!!0-saturn_solar.jpg_260x260.jpg'),
+	(9, 1, '衬衫', 150, 5, '保罗竹纤维免烫男士短袖白衬衫夏季弹力商务正装抗皱职业工装衬衣', 'https://img.alicdn.com/imgextra/i2/111890288/O1CN01GRaSux1DzwfQDFfK0_!!0-saturn_solar.jpg_260x260.jpg'),
+	(10, 1, '外套', 150, 10, '男款青少年渐变长袖衬衫春季薄款外套男士潮款宽松休闲衬衫', 'https://img.alicdn.com/imgextra/i1/1264160096/O1CN01ROdp9F1Ca0dEYQbui_!!0-saturn_solar.jpg_260x260.jpg'),
+	(13, 1, '风扇', 22, 5, 'SEEDEN西点空气循环扇家用台式电风扇静音摇头涡流对流扇直流变频', 'https://img.alicdn.com/imgextra/i4/255700126/O1CN01Xt7Y361CnkVx1br5A_!!0-saturn_solar.jpg_260x260.jpg'),
+	(15, 2, '小风扇', 20, 6, '无叶挂脖小风扇USB随身头戴迷你便携式可充电超静音办公室桌面学生小型懒人挂脖子大风力空调运动厨房小电扇', 'https://img.alicdn.com/imgextra/i2/52651592/O1CN01AcExlC1NdB8wesU9U_!!0-saturn_solar.jpg_260x260.jpg');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
 -- 导出  表 mall.saler 结构
@@ -119,12 +124,13 @@ CREATE TABLE IF NOT EXISTS `saler` (
   `bank_num` varchar(100) NOT NULL,
   `register_time` date DEFAULT NULL,
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 正在导出表  mall.saler 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `saler` DISABLE KEYS */;
 INSERT INTO `saler` (`sid`, `sname`, `password`, `phone`, `email`, `address`, `bank_num`, `register_time`) VALUES
-	(1, 'test', 'test', '15683336525', '574658957@qq.com', '四川省成都市', '12345687945', '2020-07-23');
+	(1, 'test', 'test', '15683336525', '574658957@qq.com', '四川省成都市', '12345687945', '2020-07-23'),
+	(2, 'saler', 'saler', '15684268962', '584629871@qq.com', '四川省', '12356489879', '2020-07-25');
 /*!40000 ALTER TABLE `saler` ENABLE KEYS */;
 
 -- 导出  表 mall.user 结构
@@ -138,17 +144,18 @@ CREATE TABLE IF NOT EXISTS `user` (
   `address` varchar(100) DEFAULT NULL,
   `gender` varchar(10) DEFAULT NULL,
   `birthday` date DEFAULT NULL,
-  `icon` varchar(200) DEFAULT NULL,
+  `icon` varchar(500) DEFAULT NULL,
   `register_time` date DEFAULT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 正在导出表  mall.user 的数据：~2 rows (大约)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`uid`, `uname`, `password`, `phone`, `email`, `address`, `gender`, `birthday`, `icon`, `register_time`) VALUES
-	(4, 'user', '123', '15683331111', '526874598@qq.com', '四川省成都市双流区', '男', '2020-07-01', 'https://i1.hdslb.com/bfs/archive/5af948fcfd1cc4059257a5fef520633ae6252ed5.jpg', NULL),
-	(5, 'root', '123', '15686518915', '124565294@qq.com', '', '女', '2020-07-02', 'https://i1.hdslb.com/bfs/archive/5af948fcfd1cc4059257a5fef520633ae6252ed5.jpg', NULL),
-	(6, 'test', 'test', '15687426311', '123465795@qq.com', '', '男', '2020-07-01', '', '2020-07-24');
+	(1, 'user', '123', '15683332222', '526874598@qq.cn', '四川省成都市', '女', '2020-07-04', 'https://i1.hdslb.com/bfs/archive/5af948fcfd1cc4059257a5fef520633ae6252ed5.jpg', '2020-07-25'),
+	(5, 'root', '123', '15686518915', '124565294@qq.com', '', '女', '2020-07-02', 'https://i1.hdslb.com/bfs/archive/5af948fcfd1cc4059257a5fef520633ae6252ed5.jpg', '2020-07-25'),
+	(6, 'test', 'test', '15687426311', '123465795@qq.com', '', '男', '2020-07-01', '', '2020-07-24'),
+	(7, '张三', '123', '18957896251', '', '', '男', '2020-07-01', '', '2020-07-25');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
