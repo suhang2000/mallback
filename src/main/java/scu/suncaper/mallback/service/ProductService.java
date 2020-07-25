@@ -39,8 +39,8 @@ public class ProductService {
         pro.setDescription(newProduct.getDescription());
         pro.setPrice(newProduct.getPrice());
         pro.setSid(newProduct.getSid());
-//            Product res = productDAO.save(pro);
         productDAO.save(pro);
+//        Product res = productDAO.save(pro);
     }
 
     public List<Product> getProducts() {

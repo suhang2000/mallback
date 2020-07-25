@@ -123,8 +123,7 @@ public class OrderController {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
         String name = ((JSONObject) sname).getString(INPUT);
         List<Object[]> AllOrdersForSaler = orderService.getOrdersByUname(name);
-        List<Object[]> allOrders = turning(AllOrdersForSaler);
-        return allOrders;
+        return turning(AllOrdersForSaler);
     }
     @CrossOrigin
     @PostMapping("/api/searchBy/pname/saler")
