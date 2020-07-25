@@ -12,13 +12,15 @@ import java.util.List;
 public class ProductService {
     @Autowired
     ProductDAO productDAO;
-
+    //管理人员用，来查询全部订单
     public List<Object[]> get(String pname) {
         if ("".equals(pname)) {
+            System.out.println("开始查询全部内容");
             return productDAO.findAllProducts();
         }
         else{
-            return productDAO.findAllProducts();
+            System.out.println("开始查询指定内容");
+            return productDAO.findAllProductsByPname(pname);
         }
     }
 
@@ -48,9 +50,13 @@ public class ProductService {
         return productDAO.findAll();
     }
 
-    public List<Product> getProductsBySname(String sname){
-        System.out.println(productDAO.findBySname(sname));
-        return productDAO.findBySname(sname);
+    public List<Product> getProductsByPnameAndSname(String pname, String sname){
+        if("".equals(pname)) {
+            return productDAO.findBySname(sname);
+        }
+        else{
+            return productDAO.findByPnameAndSname(pname,sname);
+        }
     }
     public void save(Product product) {
         productDAO.save(product);

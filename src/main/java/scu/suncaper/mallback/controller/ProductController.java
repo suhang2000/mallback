@@ -21,6 +21,8 @@ public class ProductController {
     @ResponseBody
     public List<Object[]> list(@RequestBody Product productToShow) {
         String pname = productToShow.getPname();
+        System.out.println("pname is");
+        System.out.println(pname);
         List<Object[]> products = productService.get(pname);
         return products;
     }
@@ -76,10 +78,11 @@ public class ProductController {
     @CrossOrigin
     @PostMapping("/api/list/product/saler")
     @ResponseBody
-    public List<Product> AllProductsForSaler(@RequestBody String snameToShow) {
-        JSON sname = com.alibaba.fastjson.JSONObject.parseObject(snameToShow);
-        String myName = ((JSONObject) sname).getString("myName");
-        return productService.getProductsBySname(myName);
+    public List<Product> AllProductsForSaler(@RequestBody String pnameToShow) {
+        JSON pname = com.alibaba.fastjson.JSONObject.parseObject(pnameToShow);
+        String targetPname = ((JSONObject) pname).getString("input");
+        String myName = ((JSONObject) pname).getString("myName");
+        return productService.getProductsByPnameAndSname(targetPname, myName);
     }
 
     @CrossOrigin
