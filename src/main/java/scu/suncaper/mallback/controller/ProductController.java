@@ -21,8 +21,7 @@ public class ProductController {
     @ResponseBody
     public List<Object[]> list(@RequestBody Product productToShow) {
         String pname = productToShow.getPname();
-        List<Object[]> products = productService.get(pname);
-        return products;
+        return productService.get(pname);
     }
 
     @CrossOrigin
@@ -35,8 +34,6 @@ public class ProductController {
     @PostMapping("/api/list/addGoods")
     @ResponseBody
     public void addProduct(@RequestBody Product newProduct) {
-        System.out.println("进入商品添加功能");
-        System.out.println(newProduct);
         productService.addProduct(newProduct);
     }
 
@@ -44,20 +41,13 @@ public class ProductController {
     @PostMapping("/api/list/dropGoodsById")
     @ResponseBody
     public Result dropById(@RequestBody Product productToDelete) {
-        System.out.println("productToDelete is :");
-        System.out.println(productToDelete);
         Integer pid = productToDelete.getPid();
-        System.out.println("pid is :");
-        System.out.println(pid);
         Product product = productService.getCertain(pid);
-        System.out.println(product);
         if (product == null) {
             return ResultFactory.buildFailResult("商品不存在！");
         } else {
-            System.out.print("商品存在");
             //删除商品
             productService.dropGoodsById(pid);
-            System.out.println("删除成功");
             return ResultFactory.buildSuccessResult(product.getPname());
         }
     }
@@ -65,7 +55,6 @@ public class ProductController {
     @CrossOrigin
     @PostMapping("/api/home/product/info")
     public void saveProduct(@RequestBody Product product) {
-        System.out.println("product/info product = " + product.toString());
         if (product.getPid() != null) {
             Product product1 = productService.getCertain(product.getPid());
             product.setSid(product1.getSid());

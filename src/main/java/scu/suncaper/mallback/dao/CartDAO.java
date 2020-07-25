@@ -16,8 +16,6 @@ public interface CartDAO extends JpaRepository<Cart, Integer> {
             "where pid=cart.cpid and cart.cuid=`user`.uid and `user`.uname=?1",nativeQuery = true)
     List<List> getCart(String uname);
 
-    //Cart getAllByCuidAndCpid(Integer cuid, Integer cpid);
-
     @Query(value = "select * from cart,`user` where cart.cpid=?1 and cart.cuid=`user`.uid and `user`.uname=?2",nativeQuery = true)
     Cart booCart(Integer pid, String uname);
 

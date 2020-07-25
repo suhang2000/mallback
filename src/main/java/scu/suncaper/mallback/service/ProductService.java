@@ -14,15 +14,10 @@ public class ProductService {
     ProductDAO productDAO;
 
     public List<Object[]> get(String pname) {
-        if ("".equals(pname)) {
-            return productDAO.findAllProducts();
-        }
-        else{
-            return productDAO.findAllProducts();
-        }
+        return productDAO.findAllProducts();
     }
 
-    public Product  getCertain(Integer  pid) {
+    public Product getCertain(Integer  pid) {
         return productDAO.getByPid(pid);
     }
 
@@ -33,15 +28,14 @@ public class ProductService {
 
     @Transactional
     public void addProduct(Product newProduct){
-            Product pro = new Product();
-            pro.setPname(newProduct.getPname());
-            pro.setNumber(newProduct.getNumber());
-            pro.setDescription(newProduct.getDescription());
-            pro.setPrice(newProduct.getPrice());
-            pro.setSid(newProduct.getSid());
+        Product pro = new Product();
+        pro.setPname(newProduct.getPname());
+        pro.setNumber(newProduct.getNumber());
+        pro.setDescription(newProduct.getDescription());
+        pro.setPrice(newProduct.getPrice());
+        pro.setSid(newProduct.getSid());
 
-            Product res = productDAO.save(pro);
-            System.out.println("after insert res: " + res);
+        Product res = productDAO.save(pro);
     }
 
     public List<Product> getProducts() {

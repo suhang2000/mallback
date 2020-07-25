@@ -90,7 +90,6 @@ public class SalerController {
     @CrossOrigin
     @GetMapping("/api/saler/{sname}")
     public int getSidBySname(@PathVariable String sname) {
-        System.out.println("sname = " + sname);
         Saler saler = salerService.findBySname(sname);
         return saler.getSid();
     }
@@ -98,7 +97,6 @@ public class SalerController {
     @CrossOrigin
     @GetMapping("/api/saler/{sname}/info")
     public Saler salerInfo(@PathVariable String sname) {
-        System.out.println("查询商家信息sname = " + sname);
         return salerService.findBySname(sname);
     }
 
