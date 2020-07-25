@@ -9,8 +9,8 @@ import scu.suncaper.mallback.pojo.Order;
 import scu.suncaper.mallback.result.Result;
 import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.OrderService;
+
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class OrderController {
@@ -26,8 +26,7 @@ public class OrderController {
     @ResponseBody
     public List<Object[]> showAllOrders() {
         List<Object[]> AllOrdersForSaler = orderService.findAllOrders();
-        List<Object[]> allOrders = turning(AllOrdersForSaler);
-        return allOrders;
+        return turning(AllOrdersForSaler);
     }
 
 
@@ -115,8 +114,7 @@ public class OrderController {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(snameToShow);
         String name = ((JSONObject) sname).getString(INPUT);
         List<Object[]> AllOrdersForSaler = orderService.getOrdersBySname(name);
-        List<Object[]> allOrders = turning(AllOrdersForSaler);
-        return allOrders;
+        return turning(AllOrdersForSaler);
     }
     @CrossOrigin
     @PostMapping("/api/searchBy/uname")
@@ -136,8 +134,7 @@ public class OrderController {
         String targetPname = ((JSONObject) pname).getString(INPUT);
         String salerName = ((JSONObject) pname).getString(MYNAME);
         List<Object[]> AllOrdersForSaler = orderService.getOrdersByPnameAndSname(targetPname, salerName);
-        List<Object[]> allOrders = turning(AllOrdersForSaler);
-        return allOrders;
+        return turning(AllOrdersForSaler);
     }
     @CrossOrigin
     @PostMapping("/api/searchBy/uname/saler")
@@ -147,8 +144,7 @@ public class OrderController {
         String targetUname = ((JSONObject) pname).getString(INPUT);
         String salerName = ((JSONObject) pname).getString(MYNAME);
         List<Object[]> AllOrdersForSaler = orderService.getOrdersByUnameAndSname(targetUname, salerName);
-        List<Object[]> allOrders = turning(AllOrdersForSaler);
-        return allOrders;
+        return turning(AllOrdersForSaler);
 
     }
     @CrossOrigin
@@ -158,8 +154,7 @@ public class OrderController {
         JSON pname = com.alibaba.fastjson.JSONObject.parseObject(pnameToShow);
         String name = ((JSONObject) pname).getString(INPUT);
         List<Object[]> AllOrdersForSaler =  orderService.getOrdersByPname(name);
-        List<Object[]> allOrders = turning(AllOrdersForSaler);
-        return allOrders;
+        return turning(AllOrdersForSaler);
     }
     @CrossOrigin
     @PostMapping("/api/cart/deleteUserOrder")

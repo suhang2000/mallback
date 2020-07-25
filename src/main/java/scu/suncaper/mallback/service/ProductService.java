@@ -33,13 +33,14 @@ public class ProductService {
 
     @Transactional
     public void addProduct(Product newProduct){
-            Product pro = new Product();
-            pro.setPname(newProduct.getPname());
-            pro.setNumber(newProduct.getNumber());
-            pro.setDescription(newProduct.getDescription());
-            pro.setPrice(newProduct.getPrice());
-            pro.setSid(newProduct.getSid());
-            Product res = productDAO.save(pro);
+        Product pro = new Product();
+        pro.setPname(newProduct.getPname());
+        pro.setNumber(newProduct.getNumber());
+        pro.setDescription(newProduct.getDescription());
+        pro.setPrice(newProduct.getPrice());
+        pro.setSid(newProduct.getSid());
+//            Product res = productDAO.save(pro);
+        productDAO.save(pro);
     }
 
     public List<Product> getProducts() {
