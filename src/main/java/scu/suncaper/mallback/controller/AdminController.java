@@ -47,7 +47,7 @@ public class AdminController {
             case 0:
                 return ResultFactory.buildFailResult("姓名和密码不能为空");
             case 1:
-                return ResultFactory.buildSuccessResult("注册成功");
+                return ResultFactory.buildSuccessResult("成功注册");
             case 2:
                 return ResultFactory.buildFailResult("管理人员重复注册");
             default:
@@ -79,7 +79,7 @@ public class AdminController {
         String password = requestAdmin.getPassword();
         requestAdmin = adminService.passwordChange(aname,password);
         if (requestAdmin != null)
-            return ResultFactory.buildSuccessResult("成功重置");
+            return ResultFactory.buildSuccessResult("成功修改");
         else
             return ResultFactory.buildSuccessResult("未知错误");
     }
