@@ -21,10 +21,7 @@ public class ProductController {
     @ResponseBody
     public List<Object[]> list(@RequestBody Product productToShow) {
         String pname = productToShow.getPname();
-        System.out.println("pname is");
-        System.out.println(pname);
-        List<Object[]> products = productService.get(pname);
-        return products;
+        return productService.get(pname);
     }
 
     @CrossOrigin
@@ -49,7 +46,6 @@ public class ProductController {
         if (product == null) {
             return ResultFactory.buildFailResult("商品不存在！");
         } else {
-            //删除商品
             productService.dropGoodsById(pid);
             return ResultFactory.buildSuccessResult(product.getPname());
         }

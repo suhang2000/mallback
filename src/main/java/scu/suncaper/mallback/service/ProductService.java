@@ -15,11 +15,9 @@ public class ProductService {
     //管理人员用，来查询全部订单
     public List<Object[]> get(String pname) {
         if ("".equals(pname)) {
-            System.out.println("开始查询全部内容");
             return productDAO.findAllProducts();
         }
         else{
-            System.out.println("开始查询指定内容");
             return productDAO.findAllProductsByPname(pname);
         }
     }

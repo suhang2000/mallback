@@ -5,9 +5,6 @@ import org.springframework.stereotype.Service;
 import scu.suncaper.mallback.dao.OrderDAO;
 import scu.suncaper.mallback.dao.ProductDAO;
 import scu.suncaper.mallback.dao.UserDAO;
-import scu.suncaper.mallback.pojo.Product;
-import scu.suncaper.mallback.pojo.User;
-
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -76,7 +73,7 @@ public class OrderService {
 
     //用户从未支付界面撤回订单
     @Transactional
-    public void dropOrder_unpaid(Integer oid){
+    public void dropOrderUnpaid(Integer oid){
         orderDAO.dropOrderUnpaid(oid);
     }
 

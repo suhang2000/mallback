@@ -14,6 +14,10 @@ import java.util.Map;
 
 @RestController
 public class OrderController {
+    public static final String MESS="商品库存不足！";
+    public static final String INPUT="input";
+    public static final String MYNAME="myName";
+
     @Autowired
     OrderService orderService;
 
@@ -41,7 +45,7 @@ public class OrderController {
             return ResultFactory.buildSuccessResult(cartToPay.getCid());
         }else{
             orderService.dropCartOrder(cid);
-            return ResultFactory.buildFailResult("商品库存不足！");
+            return ResultFactory.buildFailResult(MESS);
         }
     }
 
@@ -62,11 +66,11 @@ public class OrderController {
             return ResultFactory.buildSuccessResult(cartToPay.getCid());
         }else{
             orderService.dropCartOrder(cid);
-            return ResultFactory.buildFailResult("商品库存不足！");
+            return ResultFactory.buildFailResult(MESS);
         }
     }
 
-    //用户支付“未支付”
+    //订单界面里用户支付“未支付”订单
     @CrossOrigin
     @PostMapping("/api/order/orderPay")
     @ResponseBody
@@ -81,7 +85,7 @@ public class OrderController {
             orderService.orderProDrop(pid,num);
             return ResultFactory.buildSuccessResult(orderToPay.getOid());
         }else{
-            return ResultFactory.buildFailResult("商品库存不足！");
+            return ResultFactory.buildFailResult(MESS);
         }
     }
 
@@ -179,7 +183,7 @@ public class OrderController {
     @ResponseBody
     public Result dropOrderUnpaid(@RequestBody Order orderToDelete) {
         Integer oid = orderToDelete.getOid();
-        orderService.dropOrder_unpaid(oid);
+        orderService.dropOrderUnpaid(oid);
         return ResultFactory.buildSuccessResult(orderToDelete.getOid());
     }
 
@@ -192,7 +196,7 @@ public class OrderController {
         int pid=orderService.orderPid(oid);
         int num = orderService.orderNumber(oid);
         orderService.orderProPlus(pid,num);
-        orderService.dropOrder_unpaid(oid);
+        orderService.dropOrderUnpaid(oid);
         return ResultFactory.buildSuccessResult(orderToDelete.getOid());
     }
 
@@ -203,7 +207,7 @@ public class OrderController {
     @ResponseBody
     public List<List<String>> view(@RequestBody String unameToShow) {
         JSON uname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
-        String name = ((JSONObject) uname).getString("myName");
+        String name = ((JSONObject) uname).getString(MYNAME);
         List<List<String>> orders= orderService.getUserOrder(name);
         for(int i=0;i<orders.size();i++){
             if(orders.get(i).get(7).equals("1")){
@@ -225,7 +229,7 @@ public class OrderController {
     @ResponseBody
     public List<List<String>> view1(@RequestBody String unameToShow) {
         JSON uname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
-        String name = ((JSONObject) uname).getString("myName");
+        String name = ((JSONObject) uname).getString(MYNAME);
         List<List<String>> orders= orderService.getUserOrder1(name);
         for(int i=0;i<orders.size();i++){
             orders.get(i).add(8,"未支付");
@@ -239,7 +243,7 @@ public class OrderController {
     @ResponseBody
     public List<List> viewList(@RequestBody String unameToShow) {
         JSON uname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
-        String name = ((JSONObject) uname).getString("myName");
+        String name = ((JSONObject) uname).getString(MYNAME);
         return orderService.getUserOrder_list(name);
     }
 
@@ -249,7 +253,7 @@ public class OrderController {
     @ResponseBody
     public List<List> viewList2(@RequestBody String unameToShow) {
         JSON uname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
-        String name = ((JSONObject) uname).getString("myName");
+        String name = ((JSONObject) uname).getString(MYNAME);
         return orderService.getUserOrder2_list(name);
     }
 
@@ -259,7 +263,7 @@ public class OrderController {
     @ResponseBody
     public List<List<String>> view2(@RequestBody String unameToShow) {
         JSON uname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
-        String name = ((JSONObject) uname).getString("myName");
+        String name = ((JSONObject) uname).getString(MYNAME);
         List<List<String>> orders= orderService.getUserOrder2(name);
         for(int i=0;i<orders.size();i++){
             orders.get(i).add(8,"未发货");
@@ -273,7 +277,7 @@ public class OrderController {
     @ResponseBody
     public List<List<String>> view3(@RequestBody String unameToShow) {
         JSON uname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
-        String name = ((JSONObject) uname).getString("myName");
+        String name = ((JSONObject) uname).getString(MYNAME);
         List<List<String>> orders= orderService.getUserOrder3(name);
         for(int i=0;i<orders.size();i++){
             orders.get(i).add(8,"已发货");

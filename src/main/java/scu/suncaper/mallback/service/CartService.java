@@ -13,18 +13,27 @@ public class CartService {
     @Autowired
     CartDAO cartDAO;
 
+    //boolean函数用来判断购物车内商品是否存在
     public boolean boo(Integer cpid, String name){
         return cartDAO.booCart(cpid,name)!=null;
     }
 
+    //新增操作
     @Transactional
     public void insertCart(Integer cpid,String name){
         cartDAO.insertCart(cpid,name);
     }
 
+    //更新操作
     @Transactional
     public void updateCart(Integer cpid,String name){
         cartDAO.updateCart(cpid,name);
+    }
+
+    //删除操作
+    @Transactional
+    public void dropGoodsById(Integer cartToDelete){
+        cartDAO.deleteByCid(cartToDelete);
     }
 
     public List<List> getCart(String uname){
@@ -43,10 +52,6 @@ public class CartService {
         cartDAO.addGoods(cid);
     }
 
-    public Integer proNum(int cid){
-        return cartDAO.proNumber(cid);
-    }
-
     public List<Cart> get() {
         return cartDAO.getAllByCuid(1);
     }
@@ -54,12 +59,5 @@ public class CartService {
     public Cart getCertain(Integer  cid) {
         return cartDAO.getByCid(cid);
     }
-
-    @Transactional
-    public void dropGoodsById(Integer cartToDelete){
-        cartDAO.deleteByCid(cartToDelete);
-    }
-
-
 
 }
