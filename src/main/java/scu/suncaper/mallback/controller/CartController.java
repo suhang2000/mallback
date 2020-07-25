@@ -43,22 +43,17 @@ public class CartController {
         }
     }
 
-    //添加到购物车
     @CrossOrigin
     @PostMapping("/api/list/addCart")
     @ResponseBody
     public Result addCartById(@RequestBody Product productToAddCart) {
-        System.out.println("成功");
         Integer pid = productToAddCart.getPid();
-        System.out.print(pid+"\n");
         Product product = productService.getCertain(pid);
-        System.out.print(product+"\n");
         if(cartService.boo(product.getPid(),1)) {
             cartService.updateCart(product.getPid(),1,1);
         } else {
             cartService.insertCart(product.getPid(),1,1);
         }
-        System.out.println("增加成功");
         return ResultFactory.buildSuccessResult(product.getPname());
 
     }
