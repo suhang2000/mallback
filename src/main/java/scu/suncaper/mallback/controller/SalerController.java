@@ -80,9 +80,18 @@ public class SalerController {
     public Result deleUser(@RequestBody Saler requestSaler) {
         Integer sid = requestSaler.getSid();
         salerService.deleteBySid(sid);
-        if (null == salerService.findBySid(sid))
+        if (null == salerService.findBySid(sid)) {
             return ResultFactory.buildSuccessResult("成功删除");
-        else
+        } else {
             return ResultFactory.buildFailResult("后端出错，删除失败");
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/saler/{sname}")
+    public int getSidBySname(@PathVariable String sname) {
+        System.out.println("sname = " + sname);
+        Saler saler = salerService.findBySname(sname);
+        return saler.getSid();
     }
 }

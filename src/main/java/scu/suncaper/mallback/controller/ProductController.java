@@ -65,8 +65,11 @@ public class ProductController {
     @CrossOrigin
     @PostMapping("/api/home/product/info")
     public void saveProduct(@RequestBody Product product) {
-        Product product1 = productService.getCertain(product.getPid());
-        product.setSid(product1.getSid());
+        System.out.println("product/info product = " + product.toString());
+        if (product.getPid() != null) {
+            Product product1 = productService.getCertain(product.getPid());
+            product.setSid(product1.getSid());
+        }
         productService.save(product);
     }
 
