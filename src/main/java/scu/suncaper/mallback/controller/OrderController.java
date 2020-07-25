@@ -91,14 +91,12 @@ public class OrderController {
         }
     }
 
-
-
     @CrossOrigin
     @PostMapping("/api/searchBy/sname")
     @ResponseBody
     public List<Object[]> showOrdersBySname(@RequestBody String snameToShow) {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(snameToShow);
-        String name = ((JSONObject) sname).getString("myName");
+        String name = ((JSONObject) sname).getString("input");
         System.out.println(name);
         List<Object[]> AllOrdersForSaler = orderService.getOrdersBySname(name);
         System.out.println(AllOrdersForSaler);
@@ -113,6 +111,15 @@ public class OrderController {
         List<Object[]> AllOrders = orderService.getOrdersByUname(name);
         System.out.println(unameToShow);
         return AllOrders;
+    }
+    @CrossOrigin
+    @PostMapping("/api/searchBy/pname")
+    @ResponseBody
+    public List<Object[]> showOrdersByPname(@RequestBody String pnameToShow) {
+        JSON pname = com.alibaba.fastjson.JSONObject.parseObject(pnameToShow);
+        String name = ((JSONObject) pname).getString("input");
+        List<Object[]> AllProducts = orderService.getOrdersByPname(name);
+        return AllProducts;
     }
     @CrossOrigin
     @PostMapping("/api/searchBy/pname/saler")
@@ -137,15 +144,7 @@ public class OrderController {
         System.out.println(AllProducts);
         return AllProducts;
     }
-    @CrossOrigin
-    @PostMapping("/api/searchBy/pname")
-    @ResponseBody
-    public List<Object[]> showOrdersByPname(@RequestBody String pnameToShow) {
-        JSON pname = com.alibaba.fastjson.JSONObject.parseObject(pnameToShow);
-        String name = ((JSONObject) pname).getString("input");
-        List<Object[]> AllProducts = orderService.getOrdersByPname(name);
-        return AllProducts;
-    }
+
     @CrossOrigin
     @PostMapping("/api/cart/deleteUserOrder")
     @ResponseBody

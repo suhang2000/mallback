@@ -19,14 +19,9 @@ public class ProductController {
     @CrossOrigin
     @PostMapping("/api/list/product")
     @ResponseBody
-    public List<Product> list(@RequestBody Product productToShow) {
-        System.out.println("productToShow is :");
-        System.out.println(productToShow);
+    public List<Object[]> list(@RequestBody Product productToShow) {
         String pname = productToShow.getPname();
-        System.out.println("pname is :");
-        System.out.println(pname);
-        List<Product> products = productService.get(pname);
-        System.out.println(products);
+        List<Object[]> products = productService.get(pname);
         return products;
     }
 

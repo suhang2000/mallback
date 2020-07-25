@@ -13,12 +13,12 @@ public class ProductService {
     @Autowired
     ProductDAO productDAO;
 
-    public List<Product> get(String pname) {
+    public List<Object[]> get(String pname) {
         if ("".equals(pname)) {
-            return productDAO.findAll();
+            return productDAO.findAllProducts();
         }
         else{
-            return productDAO.getAllByPname(pname);
+            return productDAO.findAllProducts();
         }
     }
 
