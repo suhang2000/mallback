@@ -1,4 +1,3 @@
-
 package scu.suncaper.mallback.controller;
 
 import com.alibaba.fastjson.JSON;
@@ -12,8 +11,6 @@ import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.OrderService;
 import java.util.List;
 
-import java.lang.String;
-
 @RestController
 public class OrderController {
     @Autowired
@@ -22,9 +19,8 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/api/search")
     @ResponseBody
-    public List<Object[]> ShowAllOrders() {
-        List<Object[]> AllOrders = orderService.findAllOrders();
-        return AllOrders;
+    public List<Object[]> showAllOrders() {
+        return orderService.findAllOrders();
     }
 
 
@@ -94,9 +90,7 @@ public class OrderController {
     public List<Object[]> showOrdersBySname(@RequestBody String snameToShow) {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(snameToShow);
         String name = ((JSONObject) sname).getString("input");
-        System.out.println(name);
         List<Object[]> AllOrdersForSaler = orderService.getOrdersBySname(name);
-        System.out.println(AllOrdersForSaler);
         return AllOrdersForSaler;
     }
     @CrossOrigin
@@ -105,20 +99,16 @@ public class OrderController {
     public List<Object[]> showOrdersByUname(@RequestBody String unameToShow) {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
         String name = ((JSONObject) sname).getString("input");
-        List<Object[]> AllOrders = orderService.getOrdersByUname(name);
-        System.out.println(unameToShow);
-        return AllOrders;
+        return orderService.getOrdersByUname(name);
     }
     @CrossOrigin
     @PostMapping("/api/searchBy/pname/saler")
     @ResponseBody
     public List<Object[]> showOrdersByPnameForSaler(@RequestBody String pnameToShow) {
-        System.out.println(pnameToShow);
         JSON pname = com.alibaba.fastjson.JSONObject.parseObject(pnameToShow);
         String targetPname = ((JSONObject) pname).getString("input");
         String salerName = ((JSONObject) pname).getString("myName");
-        List<Object[]> AllProducts = orderService.getOrdersByPnameAndSname(targetPname, salerName);
-        return AllProducts;
+        return orderService.getOrdersByPnameAndSname(targetPname, salerName);
     }
     @CrossOrigin
     @PostMapping("/api/searchBy/uname/saler")
@@ -127,10 +117,7 @@ public class OrderController {
         JSON pname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
         String targetUname = ((JSONObject) pname).getString("input");
         String salerName = ((JSONObject) pname).getString("myName");
-        System.out.println(salerName);
-        List<Object[]> AllProducts = orderService.getOrdersByUnameAndSname(targetUname, salerName);
-        System.out.println(AllProducts);
-        return AllProducts;
+        return orderService.getOrdersByUnameAndSname(targetUname, salerName);
     }
     @CrossOrigin
     @PostMapping("/api/searchBy/pname")
@@ -138,18 +125,13 @@ public class OrderController {
     public List<Object[]> showOrdersByPname(@RequestBody String pnameToShow) {
         JSON pname = com.alibaba.fastjson.JSONObject.parseObject(pnameToShow);
         String name = ((JSONObject) pname).getString("input");
-        List<Object[]> AllProducts = orderService.getOrdersByPname(name);
-        return AllProducts;
+        return orderService.getOrdersByPname(name);
     }
     @CrossOrigin
     @PostMapping("/api/cart/deleteUserOrder")
     @ResponseBody
     public void dropById(@RequestBody Order orderToDelete) {
-        System.out.println("orderToDelete is :");
-        System.out.println(orderToDelete);
         Integer oid = orderToDelete.getOid();
-        System.out.println("pid is :");
-        System.out.println(oid);
         orderService.deleteCertain(oid);
     }
 
@@ -220,8 +202,7 @@ public class OrderController {
     public List<List> viewList(@RequestBody String unameToShow) {
         JSON uname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
         String name = ((JSONObject) uname).getString("myName");
-        List<List> orders = orderService.getUserOrder_list(name);
-        return orders;
+        return orderService.getUserOrder_list(name);
     }
 
     //用户查看待发货订单-list
@@ -231,9 +212,7 @@ public class OrderController {
     public List<List> viewList2(@RequestBody String unameToShow) {
         JSON uname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
         String name = ((JSONObject) uname).getString("myName");
-        List<List> orders = orderService.getUserOrder2_list(name);
-        System.out.println("成功");
-        return orders;
+        return orderService.getUserOrder2_list(name);
     }
 
     //用户查看待发货订单
@@ -263,6 +242,4 @@ public class OrderController {
         }
         return orders;
     }
-
-
 }

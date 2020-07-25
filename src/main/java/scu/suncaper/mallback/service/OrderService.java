@@ -21,40 +21,25 @@ public class OrderService {
     OrderDAO orderDAO;
     @Autowired
     ProductDAO productDAO;
-    User user = new User();
-    Product product = new Product();
-
-    //    @Transactional
-//    public void addOrder() {
-//        user.getProducts().add(product);
-//        userDAO.save(user);
-//        productDAO.save(product);
-//    }
 
     public List<Object[]> findAllOrders() {
         //管理人员用，用以获取所有订单
-        List<Object[]> products = orderDAO.findAllOrders();
-        return products;
+        return orderDAO.findAllOrders();
     }
     public List<Object[]> getOrdersBySname(String sname){
-        List<Object[]> OrdersBySname = orderDAO.findBySnameContaining(sname);
-        return OrdersBySname;
+        return orderDAO.findBySnameContaining(sname);
     }
     public List<Object[]> getOrdersByPname(String pname){
-        List<Object[]> ordersByPname =orderDAO.findByPnameContaining(pname);
-        return ordersByPname;
+        return orderDAO.findByPnameContaining(pname);
     }
     public List<Object[]> getOrdersByUname(String uname){
-        List<Object[]> ordersByUname =orderDAO.findByUnameContaining(uname);
-        return ordersByUname;
+        return orderDAO.findByUnameContaining(uname);
     }
     public List<Object[]> getOrdersByPnameAndSname(String pname, String sname){
-        List<Object[]> ordersByPname =orderDAO.findByPnameAndSname(pname, sname);
-        return ordersByPname;
+        return orderDAO.findByPnameAndSname(pname, sname);
     }
     public List<Object[]> getOrdersByUnameAndSname(String uname, String sname){
-        List<Object[]> ordersByUname =orderDAO.findByUnameAndSname(uname, sname);
-        return ordersByUname;
+        return orderDAO.findByUnameAndSname(uname, sname);
     }
 
     //用户增加未支付订单

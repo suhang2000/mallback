@@ -27,8 +27,7 @@ public class CartController {
     public List<List> list(@RequestBody String unameToShow) {
         JSON uname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
         String name = ((JSONObject) uname).getString("myName");
-        List<List> carts= cartService.getCart(name);
-        return carts;
+        return cartService.getCart(name);
     }
 
     //把购物车里相同商品全部记录都删除
@@ -53,16 +52,12 @@ public class CartController {
     public Result addCartByPid(@RequestBody String unameToShow) {
         JSON user = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
         String name = ((JSONObject) user).getString("myName");
-        String pid_s = ((JSONObject) user).getString("pid");
-        int pid = Integer.parseInt(pid_s);
-        System.out.println("pid:"+pid);
-        System.out.println("name:"+name);
+        String pidTemp = ((JSONObject) user).getString("pid");
+        int pid = Integer.parseInt(pidTemp);
         Product product = productService.getCertain(pid);
         if(cartService.boo(pid,name)) {
             cartService.updateCart(pid,name);
-            System.out.println("存在");
         } else {
-            System.out.println("不存在，要新建");
             cartService.insertCart(pid,name);
         }
         return ResultFactory.buildSuccessResult(product.getPname());

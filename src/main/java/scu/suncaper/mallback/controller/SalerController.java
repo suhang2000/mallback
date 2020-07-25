@@ -44,7 +44,7 @@ public class SalerController {
             case 1:
                 return ResultFactory.buildSuccessResult("注册成功");
             case 2:
-                return ResultFactory.buildFailResult("商家名重复");
+                return ResultFactory.buildFailResult("商家已存在，请换一个昵称");
             default:
                 return ResultFactory.buildFailResult("未知错误");
         }
@@ -83,14 +83,13 @@ public class SalerController {
         if (null == salerService.findBySid(sid)) {
             return ResultFactory.buildSuccessResult("成功删除");
         } else {
-            return ResultFactory.buildFailResult("后端出错，删除失败");
+            return ResultFactory.buildFailResult("服务端出错，删除失败");
         }
     }
 
     @CrossOrigin
     @GetMapping("/api/saler/{sname}")
     public int getSidBySname(@PathVariable String sname) {
-        System.out.println("sname = " + sname);
         Saler saler = salerService.findBySname(sname);
         return saler.getSid();
     }
@@ -98,7 +97,6 @@ public class SalerController {
     @CrossOrigin
     @GetMapping("/api/saler/{sname}/info")
     public Saler salerInfo(@PathVariable String sname) {
-        System.out.println("查询商家信息sname = " + sname);
         return salerService.findBySname(sname);
     }
 

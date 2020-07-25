@@ -43,7 +43,6 @@ public class ProductService {
             pro.setSid(newProduct.getSid());
 
             Product res = productDAO.save(pro);
-            System.out.println("after insert res: " + res);
     }
 
     public List<Product> getProducts() {

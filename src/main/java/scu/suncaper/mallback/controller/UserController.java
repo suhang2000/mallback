@@ -46,7 +46,7 @@ public class UserController {
             case 1:
                 return ResultFactory.buildSuccessResult("注册成功");
             case 2:
-                return ResultFactory.buildFailResult("用户名重复");
+                return ResultFactory.buildFailResult("用户已存在，请换一个昵称");
             default:
                 return ResultFactory.buildFailResult("未知错误");
         }
@@ -87,7 +87,7 @@ public class UserController {
         if (null == userService.findByUid(uid)) {
             return ResultFactory.buildSuccessResult("成功删除");
         } else {
-            return ResultFactory.buildFailResult("后端出错，删除失败");
+            return ResultFactory.buildFailResult("服务端出错，删除失败");
         }
     }
 

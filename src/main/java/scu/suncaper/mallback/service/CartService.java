@@ -14,11 +14,7 @@ public class CartService {
     CartDAO cartDAO;
 
     public boolean boo(Integer cpid, String name){
-        if(cartDAO.booCart(cpid,name)!=null)
-            return true;
-        else
-            return false;
-       // return cartDAO.booCart(cpid,name)!=null;
+        return cartDAO.booCart(cpid,name)!=null;
     }
 
     @Transactional
@@ -59,10 +55,6 @@ public class CartService {
         return cartDAO.getByCid(cid);
     }
 
-    @Transactional
-    public void addGoodsById(Integer cartToAdd){
-        //cartDAO.insertByCid(cartToAdd);
-    }
     @Transactional
     public void dropGoodsById(Integer cartToDelete){
         cartDAO.deleteByCid(cartToDelete);
