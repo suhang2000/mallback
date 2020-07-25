@@ -23,4 +23,6 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
             " from `user` u, product p, saler s"
             + " where p.sid = s.sid  GROUP BY p.pid")
     List<Object[]> findAllProducts();
+
+    List<Product> findAllByPnameLikeOrDescriptionLike(String keyword1, String keyword2);
 }

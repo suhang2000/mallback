@@ -55,4 +55,8 @@ public class ProductService {
     public void save(Product product) {
         productDAO.save(product);
     }
+
+    public List<Product> search(String keywords) {
+        return productDAO.findAllByPnameLikeOrDescriptionLike('%' + keywords + '%', '%' + keywords + '%');
+    }
 }

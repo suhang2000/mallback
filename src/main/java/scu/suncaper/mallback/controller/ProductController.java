@@ -81,4 +81,14 @@ public class ProductController {
         String myName = ((JSONObject) sname).getString("myName");
         return productService.getProductsBySname(myName);
     }
+
+    @CrossOrigin
+    @GetMapping("/api/home/search")
+    public List<Product> searchResult(@RequestParam("keywords") String keywords) {
+        if ("".equals(keywords)) {
+            return productService.getProducts();
+        } else {
+            return productService.search(keywords);
+        }
+    }
 }
