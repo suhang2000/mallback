@@ -92,34 +92,34 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
 
     //用户全部订单
     @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not " +
-            "from product,`order` " +
-            "where product.pid=`order` .pid and `order`.uid=1",nativeQuery = true)
-    List<List<String>> getUserOrder(Integer cuid);
+            "from product,`order`,`user` " +
+            "where product.pid=`order` .pid and `order`.uid=`user`.uid and `user`.uname=?1",nativeQuery = true)
+    List<List<String>> getUserOrder(String name);
 
     //用户未支付订单的list返回
-    @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order` " +
-            "where product.pid=`order` .pid and `order`.uid=1 and pay_or_not=0 and deliver_or_not=0",nativeQuery = true)
-    List<List> getUserOrderList(Integer cuid);
+    @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order`,`user` " +
+            "where product.pid=`order` .pid and `order`.uid=`user`.uid and `user`.uname=?1 and pay_or_not=0 and deliver_or_not=0",nativeQuery = true)
+    List<List> getUserOrderList(String name);
 
     //用户待发货订单的list返回
-    @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order` " +
-            "where product.pid=`order` .pid and `order`.uid=1 and pay_or_not=1 and deliver_or_not=0",nativeQuery = true)
-    List<List> getUserOrder2List(Integer cuid);
+    @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order`,`user` " +
+            "where product.pid=`order` .pid and `order`.uid=`user`.uid and `user`.uname=?1 and pay_or_not=1 and deliver_or_not=0",nativeQuery = true)
+    List<List> getUserOrder2List(String name);
 
     //用户未支付订单
-    @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order` " +
-            "where product.pid=`order` .pid and `order`.uid=1 and pay_or_not=0 and deliver_or_not=0",nativeQuery = true)
-    List<List<String>> getUserOrder1(Integer cuid);
+    @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order`,`user` " +
+            "where product.pid=`order` .pid and `order`.uid=`user`.uid and `user`.uname=?1 and pay_or_not=0 and deliver_or_not=0",nativeQuery = true)
+    List<List<String>> getUserOrder1(String name);
 
     //用户待发货订单
-    @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order` " +
-            "where product.pid=`order` .pid and `order`.uid=1 and pay_or_not=1 and deliver_or_not=0",nativeQuery = true)
-    List<List<String>> getUserOrder2(Integer cuid);
+    @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order`,`user` " +
+            "where product.pid=`order` .pid and `order`.uid=`user`.uid and `user`.uname=?1 and pay_or_not=1 and deliver_or_not=0",nativeQuery = true)
+    List<List<String>> getUserOrder2(String name);
 
     //用户待收货订单
-    @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order` " +
-            "where product.pid=`order` .pid and `order`.uid=1 and pay_or_not=1 and deliver_or_not=1",nativeQuery = true)
-    List<List<String>> getUserOrder3(Integer cuid);
+    @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order`,`user` " +
+            "where product.pid=`order` .pid and `order`.uid=`user`.uid and `user`.uname=?1 and pay_or_not=1 and deliver_or_not=1",nativeQuery = true)
+    List<List<String>> getUserOrder3(String name);
 
 
 

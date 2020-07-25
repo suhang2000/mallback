@@ -140,32 +140,32 @@ public class OrderService {
     }
 
     //用户查看全部订单
-    public List<List<String>> getUserOrder(int cuid){
-        return orderDAO.getUserOrder(cuid);
+    public List<List<String>> getUserOrder(String name){
+        return orderDAO.getUserOrder(name);
     }
 
     //用户查看未支付订单
-    public List<List<String>> getUserOrder1(int cuid){
-        return orderDAO.getUserOrder1(cuid);
+    public List<List<String>> getUserOrder1(String name){
+        return orderDAO.getUserOrder1(name);
     }
 
     //用户查看未支付订单-list
-    public List<List> getUserOrder_list(int cuid){
-        return orderDAO.getUserOrderList(cuid);
+    public List<List> getUserOrder_list(String name){
+        return orderDAO.getUserOrderList(name);
     }
 
     //用户查看待发货订单-list
-    public List<List> getUserOrder2_list(int cuid){
-        return orderDAO.getUserOrder2List(cuid);
+    public List<List> getUserOrder2_list(String name){
+        return orderDAO.getUserOrder2List(name);
     }
 
     //用户查看待发货订单
-    public List<List<String>> getUserOrder2(int cuid){
-        return orderDAO.getUserOrder2(cuid);
+    public List<List<String>> getUserOrder2(String name){
+        return orderDAO.getUserOrder2(name);
     }
 
     //用户查看待收货订单
-    public List<List<String>> getUserOrder3(int cuid){
-        return orderDAO.getUserOrder3(cuid);
+    public List<List<String>> getUserOrder3(String name){
+        return orderDAO.getUserOrder3(name);
     }
 }

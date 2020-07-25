@@ -1,5 +1,7 @@
 package scu.suncaper.mallback.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import scu.suncaper.mallback.pojo.Cart;
@@ -22,9 +24,10 @@ public class CartController {
     @CrossOrigin
     @PostMapping("/api/cart/view")
     @ResponseBody
-    public List<List> list() {
-        List<List> carts= cartService.getCart(1);
-        System.out.println(carts);
+    public List<List> list(@RequestBody String unameToShow) {
+        JSON uname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
+        String name = ((JSONObject) uname).getString("myName");
+        List<List> carts= cartService.getCart(name);
         return carts;
     }
 
@@ -43,16 +46,24 @@ public class CartController {
         }
     }
 
+    //添加到购物车
     @CrossOrigin
     @PostMapping("/api/list/addCart")
     @ResponseBody
-    public Result addCartById(@RequestBody Product productToAddCart) {
-        Integer pid = productToAddCart.getPid();
+    public Result addCartByPid(@RequestBody String unameToShow) {
+        JSON user = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
+        String name = ((JSONObject) user).getString("myName");
+        String pid_s = ((JSONObject) user).getString("pid");
+        int pid = Integer.parseInt(pid_s);
+        System.out.println("pid:"+pid);
+        System.out.println("name:"+name);
         Product product = productService.getCertain(pid);
-        if(cartService.boo(product.getPid(),1)) {
-            cartService.updateCart(product.getPid(),1,1);
+        if(cartService.boo(pid,name)) {
+            cartService.updateCart(pid,name);
+            System.out.println("存在");
         } else {
-            cartService.insertCart(product.getPid(),1,1);
+            System.out.println("不存在，要新建");
+            cartService.insertCart(pid,name);
         }
         return ResultFactory.buildSuccessResult(product.getPname());
 
@@ -64,26 +75,22 @@ public class CartController {
     @ResponseBody
     public Result addGoods(@RequestBody Cart goodToAdd) {
         Integer cid = goodToAdd.getCid();
-        Cart cart = cartService.getCertain(cid);
         cartService.addGoods(cid);
-        System.out.println("添加成功");
         return ResultFactory.buildSuccessResult(cid);
 
     }
 
-    //添加商品数量
+    //删除商品数量
     @CrossOrigin
     @PostMapping("/api/cart/removeGoods")
     @ResponseBody
     public Result removeGoods(@RequestBody Cart goodToRemove) {
         Integer cid = goodToRemove.getCid();
-        Cart cart = cartService.getCertain(cid);
         cartService.removeGoods(cid);
         Integer proNum = cartService.cartProNum(cid);
         if(proNum==0){
             cartService.dropGoodsById(cid);
         }
-
         return ResultFactory.buildSuccessResult(cid);
 
     }

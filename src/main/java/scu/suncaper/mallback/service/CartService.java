@@ -13,25 +13,32 @@ public class CartService {
     @Autowired
     CartDAO cartDAO;
 
-    public boolean boo(Integer cpid, Integer cuid){ return cartDAO.getAllByCuidAndCpid(cuid,cpid)!=null; }
-
-    @Transactional
-    public void insertCart(Integer cpid,Integer cuid,Integer number){
-        cartDAO.insertCart(cpid,cuid ,number);
+    public boolean boo(Integer cpid, String name){
+        if(cartDAO.booCart(cpid,name)!=null)
+            return true;
+        else
+            return false;
+       // return cartDAO.booCart(cpid,name)!=null;
     }
 
     @Transactional
-    public void updateCart(Integer cpid,Integer cuid,Integer number){
-        cartDAO.updateCart(cpid,cuid ,number);
+    public void insertCart(Integer cpid,String name){
+        cartDAO.insertCart(cpid,name);
     }
 
-    public List<List> getCart(int cuid){
-        return cartDAO.getCart(cuid);
+    @Transactional
+    public void updateCart(Integer cpid,String name){
+        cartDAO.updateCart(cpid,name);
+    }
+
+    public List<List> getCart(String uname){
+        return cartDAO.getCart(uname);
     }
 
     public void removeGoods(Integer cid){
         cartDAO.removeGoods(cid);
     }
+
     public int cartProNum(int cid){
         return cartDAO.cartProNumber(cid);
     }
@@ -39,6 +46,7 @@ public class CartService {
     public void addGoods(Integer cid){
         cartDAO.addGoods(cid);
     }
+
     public Integer proNum(int cid){
         return cartDAO.proNumber(cid);
     }
