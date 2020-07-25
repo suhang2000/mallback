@@ -48,6 +48,10 @@ public class ProductService {
         return productDAO.findAll();
     }
 
+    public List<Product> getProductsBySname(String sname){
+        System.out.println(productDAO.findBySname(sname));
+        return productDAO.findBySname(sname);
+    }
     public void save(Product product) {
         productDAO.save(product);
     }

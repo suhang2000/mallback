@@ -1,5 +1,7 @@
 package scu.suncaper.mallback.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import scu.suncaper.mallback.pojo.Product;
@@ -33,14 +35,16 @@ public class ProductController {
     public List<Product> productList() {
         return productService.getProducts();
     }
+
     @CrossOrigin
     @PostMapping("/api/list/addGoods")
     @ResponseBody
-    public void addProduct(@RequestBody Product newProduct){
+    public void addProduct(@RequestBody Product newProduct) {
         System.out.println("进入商品添加功能");
         System.out.println(newProduct);
         productService.addProduct(newProduct);
     }
+
     @CrossOrigin
     @PostMapping("/api/list/dropGoodsById")
     @ResponseBody
@@ -52,9 +56,9 @@ public class ProductController {
         System.out.println(pid);
         Product product = productService.getCertain(pid);
         System.out.println(product);
-        if(product == null) {
+        if (product == null) {
             return ResultFactory.buildFailResult("商品不存在！");
-        }else {
+        } else {
             System.out.print("商品存在");
             //删除商品
             productService.dropGoodsById(pid);
@@ -70,22 +74,13 @@ public class ProductController {
         product.setSid(product1.getSid());
         productService.save(product);
     }
-//    @CrossOrigin
-//    @PostMapping("/api/list/product/saler")
-//    @ResponseBody
-//    public Result AllProductsForSaler(@RequestBody String sname) {
-//        System.out.println("productToDelete is :");
-//        System.out.println(sname);sname
-//        Product product = productService.getCertain(pid);
-//        System.out.println(product);
-//        if(product == null) {
-//            return ResultFactory.buildFailResult("商品不存在！");
-//        }else {
-//            System.out.print("商品存在");
-//            //删除商品
-//            productService.dropGoodsById(pid);
-//            System.out.println("删除成功");
-//            return ResultFactory.buildSuccessResult(product.getPname());
-//        }
-//}
+
+    @CrossOrigin
+    @PostMapping("/api/list/product/saler")
+    @ResponseBody
+    public List<Product> AllProductsForSaler(@RequestBody String snameToShow) {
+        JSON sname = com.alibaba.fastjson.JSONObject.parseObject(snameToShow);
+        String myName = ((JSONObject) sname).getString("myName");
+        return productService.getProductsBySname(myName);
+    }
 }
