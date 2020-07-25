@@ -84,10 +84,11 @@ public class UserController {
     public Result deleUser(@RequestBody User requestUser) {
         Integer uid = requestUser.getUid();
         userService.deleteByUid(uid);
-        if (null == userService.findByUid(uid))
+        if (null == userService.findByUid(uid)) {
             return ResultFactory.buildSuccessResult("成功删除");
-        else
+        } else {
             return ResultFactory.buildFailResult("后端出错，删除失败");
+        }
     }
 
     @CrossOrigin
