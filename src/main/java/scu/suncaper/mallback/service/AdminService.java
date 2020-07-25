@@ -69,11 +69,19 @@ public class AdminService {
     }
 
     public Admin passwordReset(Admin admin) {
-        Admin adminInDB = adminDAO.findByAname(admin.getAname());
         String salt = generateSalt();
         String encodedPassword = md5Hex("rootpassword"+salt);
         admin.setSalt(salt);
         admin.setPassword(encodedPassword);
+        return adminDAO.save(admin);
+    }
+
+    public Admin passwordChange(String name, String pwd) {
+        Admin adminInDB = adminDAO.findByAname(name);
+        String salt = generateSalt();
+        String encodedPassword = md5Hex(pwd+salt);
+        adminInDB.setSalt(salt);
+        adminInDB.setPassword(encodedPassword);
         return adminDAO.save(adminInDB);
     }
 

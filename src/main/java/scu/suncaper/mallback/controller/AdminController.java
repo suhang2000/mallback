@@ -71,5 +71,18 @@ public class AdminController {
             return ResultFactory.buildSuccessResult("未知错误");
     }
 
+    @CrossOrigin
+    @PostMapping("/api/pwdreset/admin")
+    @ResponseBody
+    public Result AdminPwdChange(@RequestBody Admin requestAdmin) {
+        String aname = HtmlUtils.htmlEscape(requestAdmin.getAname());
+        String password = requestAdmin.getPassword();
+        requestAdmin = adminService.passwordChange(aname,password);
+        if (requestAdmin != null)
+            return ResultFactory.buildSuccessResult("成功重置");
+        else
+            return ResultFactory.buildSuccessResult("未知错误");
+    }
+
 
 }
