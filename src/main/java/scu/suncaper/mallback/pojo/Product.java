@@ -17,6 +17,7 @@ public class Product {
     Double price;
     Integer number;
     String description;
+    String cover;
 
     public Integer getPid() {
         return pid;
@@ -62,15 +63,12 @@ public class Product {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "pid=" + pid +
-                ", sid=" + sid +
-                ", pname='" + pname + '\'' +
-                ", price=" + price +
-                ", number=" + number +
-                ", description='" + description + '\'' +
-                '}';
+    public String getCover() {
+        return cover;
     }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
 }
