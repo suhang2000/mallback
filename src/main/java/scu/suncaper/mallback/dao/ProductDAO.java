@@ -15,7 +15,7 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     Set<Product> getAllBySid(Integer sid);
     List<Product> getAllByPname(String pname);
 
-    @Query(nativeQuery = true, value = "SELECT p.pid,p.sid, p.pname ,p.price,p.number,p.description" +
+    @Query(nativeQuery = true, value = "SELECT p.pid,p.sid, p.pname ,p.price,p.number,p.description ,p.cover" +
             " from `user` u, product p, `order` o, saler s"
             + " where p.sid = s.sid and s.sname = ?1 GROUP BY p.pid")
     List<Product> findBySname(String sname);
@@ -23,7 +23,7 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
             " from `user` u, product p, saler s"
             + " where p.sid = s.sid  GROUP BY p.pid")
     List<Object[]> findAllProducts();
-    @Query(nativeQuery = true, value = "SELECT p.pid,p.sid, p.pname ,p.price,p.number,p.description" +
+    @Query(nativeQuery = true, value = "SELECT p.pid,p.sid, p.pname ,p.price,p.number,p.description, p.cover" +
             " from `user` u, product p, `order` o, saler s"
             + " where p.sid = s.sid and pname = ?1 and s.sname = ?2 GROUP BY p.pid")
     List<Product> findByPnameAndSname(String pname, String sname);
