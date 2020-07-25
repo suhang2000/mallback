@@ -10,7 +10,6 @@ import scu.suncaper.mallback.pojo.User;
 
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -92,7 +91,7 @@ public class OrderService {
     //用户从未支付界面撤回订单
     @Transactional
     public void dropOrder_unpaid(Integer oid){
-        orderDAO.dropOrder_unpaid(oid);
+        orderDAO.dropOrderUnpaid(oid);
     }
 
     //返回商品数量-用户
@@ -153,12 +152,12 @@ public class OrderService {
 
     //用户查看未支付订单-list
     public List<List> getUserOrder_list(int cuid){
-        return orderDAO.getUserOrder_list(cuid);
+        return orderDAO.getUserOrderList(cuid);
     }
 
     //用户查看待发货订单-list
     public List<List> getUserOrder2_list(int cuid){
-        return orderDAO.getUserOrder2_list(cuid);
+        return orderDAO.getUserOrder2List(cuid);
     }
 
     //用户查看待发货订单

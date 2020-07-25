@@ -13,13 +13,8 @@ public class CartService {
     @Autowired
     CartDAO cartDAO;
 
-    public boolean boo(Integer cpid, Integer cuid){
-        if(cartDAO.getAllByCuidAndCpid(cuid,cpid)!=null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    public boolean boo(Integer cpid, Integer cuid){ return cartDAO.getAllByCuidAndCpid(cuid,cpid)!=null; }
+
     @Transactional
     public void insertCart(Integer cpid,Integer cuid,Integer number){
         cartDAO.insertCart(cpid,cuid ,number);

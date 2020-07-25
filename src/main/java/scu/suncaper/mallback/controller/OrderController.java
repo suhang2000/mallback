@@ -51,7 +51,6 @@ public class OrderController {
             orderService.dropCartOrder(cid);
             return ResultFactory.buildFailResult("商品库存不足！");
         }
-
     }
 
     //从购物车里增加已支付订单
@@ -99,7 +98,7 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/api/searchBy/sname")
     @ResponseBody
-    public List<Object[]> ShowOrdersBySname(@RequestBody String snameToShow) {
+    public List<Object[]> showOrdersBySname(@RequestBody String snameToShow) {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(snameToShow);
         String name = ((JSONObject) sname).getString("input");
         List<Object[]> AllSalers = orderService.getOrdersBySname(name);
@@ -108,7 +107,7 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/api/searchBy/uname")
     @ResponseBody
-    public List<Object[]> ShowOrdersByUname(@RequestBody String unameToShow) {
+    public List<Object[]> showOrdersByUname(@RequestBody String unameToShow) {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
         String name = ((JSONObject) sname).getString("input");
         List<Object[]> AllOrders = orderService.getOrdersByUname(name);
@@ -118,7 +117,7 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/api/searchBy/pname")
     @ResponseBody
-    public List<Object[]> ShowOrdersByPname(@RequestBody String pnameToShow) {
+    public List<Object[]> showOrdersByPname(@RequestBody String pnameToShow) {
         JSON pname = com.alibaba.fastjson.JSONObject.parseObject(pnameToShow);
         String name = ((JSONObject) pname).getString("input");
         List<Object[]> AllProducts = orderService.getOrdersByPname(name);
@@ -140,7 +139,7 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/api/order/dropUnpaid")
     @ResponseBody
-    public Result dropOrder_unpaid(@RequestBody Order orderToDelete) {
+    public Result dropOrderUnpaid(@RequestBody Order orderToDelete) {
         Integer oid = orderToDelete.getOid();
         orderService.dropOrder_unpaid(oid);
         return ResultFactory.buildSuccessResult(orderToDelete.getOid());
@@ -150,7 +149,7 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/api/order/dropSend")
     @ResponseBody
-    public Result dropOrder_send(@RequestBody Order orderToDelete) {
+    public Result dropOrderSend(@RequestBody Order orderToDelete) {
         Integer oid = orderToDelete.getOid();
         int pid=orderService.orderPid(oid);
         int num = orderService.orderNumber(oid);
@@ -196,7 +195,7 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/api/userorder/viewlist")
     @ResponseBody
-    public List<List> view_list() {
+    public List<List> viewList() {
         List<List> orders = orderService.getUserOrder_list(1);
         return orders;
     }
@@ -205,7 +204,7 @@ public class OrderController {
     @CrossOrigin
     @PostMapping("/api/userorder/viewlistSend")
     @ResponseBody
-    public List<List> view_list2() {
+    public List<List> viewList2() {
         List<List> orders = orderService.getUserOrder2_list(1);
         System.out.println("成功");
         return orders;

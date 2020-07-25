@@ -13,7 +13,7 @@ import java.util.List;
 import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 
 @RestController
-public class AdminLogController {
+public class AdminController {
     @Autowired
     AdminService adminService;
 

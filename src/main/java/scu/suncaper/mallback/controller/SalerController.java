@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
-public class SalerLogController {
+public class SalerController {
     @Autowired
     SalerService salerService;
 

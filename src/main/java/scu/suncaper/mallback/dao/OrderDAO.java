@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import scu.suncaper.mallback.pojo.Order;
 
 import javax.transaction.Transactional;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public interface OrderDAO extends JpaRepository<Order, Integer> {
@@ -63,7 +61,7 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
     @Transactional
     @Modifying
     @Query(value = "delete from `order` where oid=?1",nativeQuery = true)
-    void dropOrder_unpaid(Integer oid);
+    void dropOrderUnpaid(Integer oid);
 
     //根据cid找到商品的库存
     @Query(value = "select product.number " +
@@ -101,12 +99,12 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
     //用户未支付订单的list返回
     @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order` " +
             "where product.pid=`order` .pid and `order`.uid=1 and pay_or_not=0 and deliver_or_not=0",nativeQuery = true)
-    List<List> getUserOrder_list(Integer cuid);
+    List<List> getUserOrderList(Integer cuid);
 
     //用户待发货订单的list返回
     @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order` " +
             "where product.pid=`order` .pid and `order`.uid=1 and pay_or_not=1 and deliver_or_not=0",nativeQuery = true)
-    List<List> getUserOrder2_list(Integer cuid);
+    List<List> getUserOrder2List(Integer cuid);
 
     //用户未支付订单
     @Query(value = "select oid,pname,trade_num,price,trade_num*price,trade_time,pay_or_not,deliver_or_not from product,`order` " +

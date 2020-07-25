@@ -37,8 +37,7 @@ public class AdminService {
         SecureRandom random = new SecureRandom();
         byte[] bytes = new byte[15];
         random.nextBytes(bytes);
-        String salt = encodeBase64String(bytes);
-        return salt;
+        return encodeBase64String(bytes);
     }
 
     public int adminRegister(Admin admin) {

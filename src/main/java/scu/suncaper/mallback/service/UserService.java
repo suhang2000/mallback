@@ -2,14 +2,11 @@ package scu.suncaper.mallback.service;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 import scu.suncaper.mallback.dao.UserDAO;
 import scu.suncaper.mallback.pojo.User;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
