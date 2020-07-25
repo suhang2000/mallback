@@ -10,6 +10,7 @@ import scu.suncaper.mallback.result.Result;
 import scu.suncaper.mallback.result.ResultFactory;
 import scu.suncaper.mallback.service.OrderService;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class OrderController {
@@ -91,6 +92,26 @@ public class OrderController {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(snameToShow);
         String name = ((JSONObject) sname).getString("input");
         List<Object[]> AllOrdersForSaler = orderService.getOrdersBySname(name);
+        for (int i = 0; i < AllOrdersForSaler.size(); i++) {
+            Object[] order = AllOrdersForSaler.get(i);
+            System.out.println(order[5].toString());
+            if(order[5].toString().equals("0")){
+                System.out.println("未付款");
+                order[5] = "未付款";
+            }
+            else{
+                System.out.println("已付款");
+                order[5] = "已付款";
+            }
+            if(order[6].toString().equals("0")){
+                System.out.println("未发货");
+                order[6] = "未发货";
+            }
+            else{
+                System.out.println("已发货");
+                order[6] = "已发货";
+            }
+        }
         return AllOrdersForSaler;
     }
     @CrossOrigin
@@ -99,6 +120,7 @@ public class OrderController {
     public List<Object[]> showOrdersByUname(@RequestBody String unameToShow) {
         JSON sname = com.alibaba.fastjson.JSONObject.parseObject(unameToShow);
         String name = ((JSONObject) sname).getString("input");
+
         return orderService.getOrdersByUname(name);
     }
     @CrossOrigin
@@ -135,6 +157,14 @@ public class OrderController {
         orderService.deleteCertain(oid);
     }
 
+    @CrossOrigin
+    @PostMapping("/api/list/order/deliver")
+    @ResponseBody
+    public void deliverOrder(@RequestBody String orderToDeliver) {
+        JSON oid = com.alibaba.fastjson.JSONObject.parseObject(orderToDeliver);
+        String targetOid = ((JSONObject) oid).getString("orderNum");
+        orderService.deliverOrders(targetOid);
+    }
     //用户删除“未支付”
     @CrossOrigin
     @PostMapping("/api/order/dropUnpaid")

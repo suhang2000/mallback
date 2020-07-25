@@ -124,39 +124,44 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
 
 
     void deleteByOid(Integer oid);
-    @Query(nativeQuery = true, value = "SELECT p.pid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
+    @Query(nativeQuery = true, value = "SELECT o.oid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
             " o.deliver_or_not,u.uname,s.sname from `user` u, product p, `order` o, saler s"
             + " where u.uid = o.uid and p.pid = o.pid and p.sid = s.sid ")
     List<Object[]> findAllOrders();
 
 
-    @Query(nativeQuery = true, value = "SELECT p.pid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
+    @Query(nativeQuery = true, value = "SELECT o.oid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
             " o.deliver_or_not,u.uname,s.sname from `user` u, product p, `order` o, saler s"
             + " where u.uid = o.uid and p.pid = o.pid and p.sid = s.sid and p.sid = ?1 ")
     List<Object[]> findBySidContaining(Integer sid);
 
-    @Query(nativeQuery = true, value = "SELECT p.pid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
+    @Query(nativeQuery = true, value = "SELECT o.oid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
             " o.deliver_or_not,u.uname,s.sname from `user` u, product p, `order` o, saler s"
             + " where u.uid = o.uid and p.pid = o.pid and p.sid = s.sid and s.sname= ?1")
     List<Object[]> findBySnameContaining(String sname);
 
-    @Query(nativeQuery = true, value = "SELECT p.pid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
+    @Query(nativeQuery = true, value = "SELECT o.oid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
             " o.deliver_or_not,u.uname,s.sname from `user` u, product p, `order` o, saler s"
             + " where u.uid = o.uid and p.pid = o.pid and p.sid = s.sid and p.pname = ?1 ")
     List<Object[]> findByPnameContaining(String pname);
 
-    @Query(nativeQuery = true, value = "SELECT p.pid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
+    @Query(nativeQuery = true, value = "SELECT o.oid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
             " o.deliver_or_not,u.uname,s.sname from `user` u, product p, `order` o, saler s"
             + " where u.uid = o.uid and p.pid = o.pid and p.sid = s.sid and u.uname = ?1 ")
     List<Object[]> findByUnameContaining(String uname);
 
-    @Query(nativeQuery = true, value = "SELECT p.pid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
+    @Query(nativeQuery = true, value = "SELECT o.oid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
             " o.deliver_or_not,u.uname,s.sname from `user` u, product p, `order` o, saler s"
             + " where u.uid = o.uid and p.pid = o.pid and p.sid = s.sid and p.pname = ?1 and s.sname= ?2 ")
     List<Object[]> findByPnameAndSname(String pname, String sname);
 
-    @Query(nativeQuery = true, value = "SELECT p.pid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
+    @Query(nativeQuery = true, value = "SELECT o.oid, p.pname ,o.trade_time,o.trade_num ,o.address,o.pay_or_not," +
             " o.deliver_or_not,u.uname,s.sname from `user` u, product p, `order` o, saler s"
             + " where u.uid = o.uid and p.pid = o.pid and p.sid = s.sid and u.uname = ?1 and s.sname= ?2 ")
     List<Object[]> findByUnameAndSname(String uname, String sname);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update `order` set deliver_or_not = 1 where oid=?1",nativeQuery = true)
+    void deliverOrders(String oid);
 }

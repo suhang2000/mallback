@@ -41,7 +41,9 @@ public class OrderService {
     public List<Object[]> getOrdersByUnameAndSname(String uname, String sname){
         return orderDAO.findByUnameAndSname(uname, sname);
     }
-
+    public  void deliverOrders(String oid){
+        orderDAO.deliverOrders(oid);
+    }
     //用户增加未支付订单
     @Transactional
     public void addOrderPay1(Integer cid, Integer uid){
