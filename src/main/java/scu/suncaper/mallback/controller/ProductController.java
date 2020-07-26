@@ -46,8 +46,12 @@ public class ProductController {
         if (product == null) {
             return ResultFactory.buildFailResult("商品不存在！");
         } else {
+            try{
             productService.dropGoodsById(pid);
-            return ResultFactory.buildSuccessResult(product.getPname());
+            return ResultFactory.buildFailResult("删除成功");
+            }catch (Exception e){
+                return ResultFactory.buildFailResult("该商品还有订单未处理");
+            }
         }
     }
 
