@@ -56,7 +56,7 @@ public class CartController {
         int pid = Integer.parseInt(pidTemp);
         int count = cartService.getCount(name);
         Product product = productService.getCertain(pid);
-        if(count<2){
+        if(count<10){
             if(cartService.boo(pid,name)) {
                 cartService.updateCart(pid,name);
             } else {
