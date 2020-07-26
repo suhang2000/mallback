@@ -54,14 +54,16 @@ public class CartController {
         String name = ((JSONObject) user).getString("myName");
         String pidTemp = ((JSONObject) user).getString("pid");
         int pid = Integer.parseInt(pidTemp);
+        int count = cartService.getCount(name);
         Product product = productService.getCertain(pid);
-        if(cartService.boo(pid,name)) {
-            cartService.updateCart(pid,name);
-        } else {
-            cartService.insertCart(pid,name);
-        }
-        return ResultFactory.buildSuccessResult(product.getPname());
-
+        if(count<2){
+            if(cartService.boo(pid,name)) {
+                cartService.updateCart(pid,name);
+            } else {
+                cartService.insertCart(pid,name);
+            }
+            return ResultFactory.buildSuccessResult(product.getPname());
+        }else return ResultFactory.buildFailResult("购物车已满，请结算后继续添加商品");
     }
 
     //添加商品数量

@@ -43,6 +43,10 @@ public interface CartDAO extends JpaRepository<Cart, Integer> {
     @Modifying
     void deleteByCid(Integer cid);
 
+
+    @Query(value = "select count(*) from cart,user where cart.cuid=`user`.uid and `user`.uname=?1",nativeQuery = true)
+    Integer getCount(String uanme);
+
     //添加到购物车功能
     @Transactional
     @Modifying

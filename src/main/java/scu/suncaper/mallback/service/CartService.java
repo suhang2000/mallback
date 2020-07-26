@@ -60,4 +60,8 @@ public class CartService {
         return cartDAO.getByCid(cid);
     }
 
+    public Integer getCount(String uname){
+        return cartDAO.getCount(uname);
+    }
+
 }
