@@ -48,7 +48,7 @@ public class ProductController {
         } else {
             try{
             productService.dropGoodsById(pid);
-            return ResultFactory.buildFailResult("删除成功");
+            return ResultFactory.buildSuccessResult("删除成功");
             }catch (Exception e){
                 return ResultFactory.buildFailResult("该商品还有订单未处理");
             }
