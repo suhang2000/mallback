@@ -16,4 +16,4 @@
 
 ## 前端代码
 
-<https://github.com/kamilsh/mallvue>
+<https://github.com/suhang2000/mallvue>
